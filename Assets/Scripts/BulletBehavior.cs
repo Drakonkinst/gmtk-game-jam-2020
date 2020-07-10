@@ -18,11 +18,11 @@ public class BulletBehavior : MonoBehaviour
         myRb.AddForce(Vector3.forward * 250 * speed * Time.deltaTime, ForceMode.Force);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider col)
     {
-        if(collision.gameObject.tag != "Player")
+        if(col.gameObject.tag != "Player")
         {
-            Debug.Log("Bullet Collision with " + collision.gameObject.name);
+            Debug.Log("Bullet Collision with " + col.gameObject.name);
             Destroy(gameObject); // When I collide with something, destroy myself
         } 
     }
