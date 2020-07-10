@@ -243,6 +243,36 @@ MonoBehaviour:
   following: {fileID: 644097639}
   offset: 6
   height: 10
+--- !u!1 &450330481
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 450330482}
+  m_Layer: 0
+  m_Name: BulletHell
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &450330482
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 450330481}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &527561191
 GameObject:
   m_ObjectHideFlags: 0
@@ -359,6 +389,7 @@ GameObject:
   - component: {fileID: 634771656}
   - component: {fileID: 634771655}
   - component: {fileID: 634771654}
+  - component: {fileID: 634771652}
   m_Layer: 0
   m_Name: ChickenModel
   m_TagString: Player
@@ -366,6 +397,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &634771652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 634771651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c70b37793840ca4fa5bb58fe83a3f6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabToSpawn: {fileID: 2162433631264805878, guid: d7eb7fca448cd0340aab2e6cc4058fe1,
+    type: 3}
+  parentObject: {fileID: 450330482}
 --- !u!23 &634771654
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -441,7 +487,6 @@ GameObject:
   - component: {fileID: 644097635}
   - component: {fileID: 644097634}
   - component: {fileID: 644097633}
-  - component: {fileID: 644097640}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -574,20 +619,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &644097640
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 644097632}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c70b37793840ca4fa5bb58fe83a3f6a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabToSpawn: {fileID: 2162433631264805878, guid: d7eb7fca448cd0340aab2e6cc4058fe1,
-    type: 3}
 --- !u!1 &708630717
 GameObject:
   m_ObjectHideFlags: 0
