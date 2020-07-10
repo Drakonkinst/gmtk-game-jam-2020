@@ -27,7 +27,7 @@ public class MouseInputManager : MonoBehaviour
     {
         //Debug.Log("MaxX: " + width);
         //Debug.Log("MaxY: " + height);
-        Debug.Log("Position: " + mousePosition);
+        //Debug.Log("Position: " + mousePosition);
 
     }
 
