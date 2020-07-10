@@ -242,7 +242,6 @@ MonoBehaviour:
   following: {fileID: 644097639}
   offset: 6
   height: 10
-<<<<<<< Updated upstream
 --- !u!1 &450330481
 GameObject:
   m_ObjectHideFlags: 0
@@ -276,7 +275,6 @@ Transform:
 --- !u!1 &527561191
 =======
 --- !u!1 &588821081
->>>>>>> Stashed changes
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
