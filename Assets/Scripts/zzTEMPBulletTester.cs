@@ -5,11 +5,14 @@ using UnityEngine;
 public class zzTEMPBulletTester : MonoBehaviour
 {
     public GameObject prefabToSpawn;
+    public Transform parentObject;
+    
+    private Transform myTransform;
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        myTransform = transform;
     }
 
     // Update is called once per frame
@@ -17,7 +20,9 @@ public class zzTEMPBulletTester : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            Instantiate(prefabToSpawn, transform);
+            GameObject bullet = Instantiate(prefabToSpawn, parentObject);
+            bullet.transform.position = myTransform.position;
+            
         }
     }
 
