@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     public SteeringManager steering;
     
     private Transform myTransform;
+    private Transform model;
     private bool isAvoiding = false;
     // Start is called before the first frame update
     void Start()
@@ -17,6 +18,10 @@ public class PlayerMovement : MonoBehaviour
             Debug.LogError("No steering manager found!");
         }
         myTransform = transform;
+        model = myTransform.Find("ChickenModel");
+        if(model == null) {
+            Debug.LogError("No player model found!");
+        }
     }
 
     // Update is called once per frame
@@ -24,11 +29,13 @@ public class PlayerMovement : MonoBehaviour
     {
         DoBoundaryBehavior();
         if(!isAvoiding) {
-            Debug.Log("Wandering!");
             DoWanderBehavior();
         }
         
-        if(steering.IsValid(SteeringManager.ToVector2(myTransform.position)));
+        model.rotation = Quaternion.Euler(0, -steering.facing * Mathf.Rad2Deg, 0);
+        //if(moveDirection != Vector3.zero) {
+            //transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(moveDirection), rotationSpeed * Time.deltaTime);
+        //}
         steering.UpdateSteering();
     }
     
@@ -38,7 +45,6 @@ public class PlayerMovement : MonoBehaviour
             isAvoiding = true;
             steering.Seek(SceneManager.Instance.worldCenter, 0.0f);
         } else if(isAvoiding) {
-            Debug.Log("No longer avoiding");
             // not out of bounds
             isAvoiding = false;
             steering.SetWanderAngle(SceneManager.Instance.worldCenter);

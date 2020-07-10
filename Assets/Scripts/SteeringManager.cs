@@ -21,6 +21,9 @@ public class SteeringManager : MonoBehaviour {
     }
 
     public GameObject host;
+    public float facing = 0.0f;
+    [System.NonSerialized]
+    public float wanderAngle;
     public float maxForce = 0.1f;
     public float maxVelocity = 2.0f;
     public float wanderCircleDistance = 1.0f;
@@ -34,12 +37,9 @@ public class SteeringManager : MonoBehaviour {
     private float halfSight;
     private float sightAngle;
     
-    
     private Transform hostTransform;
     private Rigidbody hostRb;
-    private float wanderAngle;
     private Vector2 steering;
-    private float facing;
     
     void Start() {
         this.host = gameObject;
@@ -100,6 +100,7 @@ public class SteeringManager : MonoBehaviour {
     public void UpdateSteering() {
         Debug.Log("Updating!");
         steering = Truncate(steering, maxForce);
+        
         hostRb.velocity += ToVector3(steering);
         hostRb.velocity = ToVector3(Truncate(GetHostVelocity(), maxVelocity));
         
@@ -203,7 +204,6 @@ public class SteeringManager : MonoBehaviour {
         float minY = center.x - halfLength;
         float maxX = center.x + halfWidth;
         float maxY = center.x + halfLength;
-        Debug.Log("[" + minX + "," + maxX + "]; [" + minY + "," + maxY + "]");
         
         return (vector.x >= minX && vector.x <= maxX
                 && vector.y >= minY && vector.y <= maxY);
