@@ -28,7 +28,6 @@ public class SteeringManager : MonoBehaviour {
     public float maxAngleChangeDeg = 15.0f;
     public float sightDistance = 5.0f;
     public float sightAngleDeg = 30.0f;
-    public Vector2 worldCenter;
     public float distanceFromCenterWIP = 5.0f;
     
     private float maxAngleChange;
@@ -197,6 +196,16 @@ public class SteeringManager : MonoBehaviour {
     }
     
     public bool IsValid(Vector2 vector) {
-        return Vector2.Distance(worldCenter, vector) < distanceFromCenterWIP;
+        Vector2 center = SceneManager.Instance.worldCenter;
+        float halfWidth = SceneManager.Instance.worldWidth / 2.0f;
+        float halfLength = SceneManager.Instance.worldLength / 2.0f;
+        float minX = center.x - halfWidth;
+        float minY = center.x - halfLength;
+        float maxX = center.x + halfWidth;
+        float maxY = center.x + halfLength;
+        Debug.Log("[" + minX + "," + maxX + "]; [" + minY + "," + maxY + "]");
+        
+        return (vector.x >= minX && vector.x <= maxX
+                && vector.y >= minY && vector.y <= maxY);
     }
 }

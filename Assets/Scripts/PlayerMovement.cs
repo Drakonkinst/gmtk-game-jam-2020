@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public SteeringManager steering;
     
+    private Transform myTransform;
     private bool isAvoiding = false;
     // Start is called before the first frame update
     void Start()
@@ -15,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
         if(steering == null) {
             Debug.LogError("No steering manager found!");
         }
+        myTransform = transform;
     }
 
     // Update is called once per frame
@@ -25,20 +27,21 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("Wandering!");
             DoWanderBehavior();
         }
+        
+        if(steering.IsValid(SteeringManager.ToVector2(myTransform.position)));
         steering.UpdateSteering();
     }
     
     private void DoBoundaryBehavior() {
         bool isOutOfBounds = !steering.CheckBounds();
         if(isOutOfBounds) {
-            Debug.Log("Out of bounds!");
             isAvoiding = true;
-            steering.Seek(steering.worldCenter, 0.0f);
+            steering.Seek(SceneManager.Instance.worldCenter, 0.0f);
         } else if(isAvoiding) {
             Debug.Log("No longer avoiding");
             // not out of bounds
             isAvoiding = false;
-            steering.SetWanderAngle(steering.worldCenter);
+            steering.SetWanderAngle(SceneManager.Instance.worldCenter);
         }
     }
     
