@@ -1,21 +1,39 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
+using UnityEngine.SceneManagement;
 using UnityEngine;
+using System;
 
-public class NewBehaviourScript : MonoBehaviour
+public class MouseInputManager : MonoBehaviour
 {
-    public Vector2 mousePosition;
+    public static Vector2 mousePosition;
+    public static int width;
+    public static int  height;
     // Start is called before the first frame update
     void Start()
     {
-        mousePosition = MouseEventBase<T0>.mousePosition;
+        width = Screen.width;
+        height = Screen.height;
+        getInput();
     }
 
     // Update is called once per frame
     void Update()
     {
-        mousePosition = MouseEventBase<T0>.mousePosition; // picked up by player to use Transform.lookAt to get the proper rotation
-        Debug.Log("Rotation: " + mousePosition);
+        getInput();
+    }
+
+    void OnMouseDown()
+    {
+        //Debug.Log("MaxX: " + width);
+        //Debug.Log("MaxY: " + height);
+        Debug.Log("Position: " + mousePosition);
+
+    }
+
+    void getInput()// picked up by player to use Transform.lookAt to get the proper rotation
+    {
+        Vector3 rawPosition = Input.mousePosition;
+        mousePosition = new Vector2(rawPosition.x, Math.Abs(rawPosition.y - height));
     }
 }
