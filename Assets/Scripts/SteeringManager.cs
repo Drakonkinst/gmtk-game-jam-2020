@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SteeringManager {
+public class SteeringManager : MonoBehaviour {
     private static readonly float MaxAngle = 2.0f * Mathf.PI; 
     
     public static Vector3 ToVector3(Vector2 vector) {
@@ -19,27 +19,48 @@ public class SteeringManager {
         }
         return vector;
     }
-    
+
+    public GameObject host;
     public float maxForce = 0.1f;
     public float maxVelocity = 2.0f;
     public float wanderCircleDistance = 1.0f;
     public float wanderCircleRadius = 3.0f;
     public float maxAngleChangeDeg = 15.0f;
-    public float sightDistance = 100.0f;
+    public float sightDistance = 5.0f;
     public float sightAngleDeg = 30.0f;
     public Vector2 worldCenter;
+    public float distanceFromCenterWIP = 5.0f;
     
     private float maxAngleChange;
     private float halfSight;
     private float sightAngle;
     
-    private GameObject host;
+    
     private Transform hostTransform;
     private Rigidbody hostRb;
     private float wanderAngle;
     private Vector2 steering;
     private float facing;
     
+    void Start() {
+        this.host = gameObject;
+        this.maxAngleChange = maxAngleChangeDeg * Mathf.Deg2Rad;
+        this.halfSight = sightDistance / 2.0f;
+        this.sightAngle = sightAngleDeg * Mathf.Deg2Rad;
+        
+        this.host = host;
+        this.hostTransform = host.transform;
+        this.hostRb = host.GetComponent<Rigidbody>();
+        this.wanderAngle = Random.Range(0.0f, MaxAngle);
+        this.facing = 0.0f;
+        
+        if(hostTransform == null || hostRb == null) {
+            Debug.LogError("Steering manager host missing transform and/or rigidbody!");
+        }
+        
+        Reset();
+    }
+    /**
     public SteeringManager(GameObject host) {
         this.maxAngleChange = maxAngleChangeDeg * Mathf.Deg2Rad;
         this.halfSight = sightDistance / 2.0f;
@@ -47,11 +68,16 @@ public class SteeringManager {
         
         this.host = host;
         this.hostTransform = host.transform;
+        this.hostRb = host.GetComponent<Rigidbody>();
         this.wanderAngle = Random.Range(0.0f, MaxAngle);
         this.facing = 0.0f;
         
+        if(hostTransform == null || hostRb == null) {
+            Debug.Log("Steering manager missing transform and/or rigidbody!");
+        }
+        
         Reset();
-    }
+    }*/
     
     private void UpdateFacing() {
         Vector2 velocity = GetHostVelocity();
@@ -72,20 +98,23 @@ public class SteeringManager {
         return ToVector2(hostRb.velocity);
     }
     
-    public void Update() {
+    public void UpdateSteering() {
+        Debug.Log("Updating!");
         steering = Truncate(steering, maxForce);
         hostRb.velocity += ToVector3(steering);
         hostRb.velocity = ToVector3(Truncate(GetHostVelocity(), maxVelocity));
-        UpdateFacing(); // probably want to call this on the host later
+        
+        // probably want to call this on the host later
+        UpdateFacing();
         //hostTransform.position += hostRb.velocity // I think this is done automatically in Unity
         Reset();
     }
     
-    public void Seek(Vector3 targetPos, float slowingRadius = 20.0f) {
+    public void Seek(Vector3 targetPos, float slowingRadius = 5.0f) {
         Seek(ToVector2(targetPos), slowingRadius);
     }
     
-    public void Seek(Vector2 targetPos, float slowingRadius = 20.0f) {
+    public void Seek(Vector2 targetPos, float slowingRadius = 5.0f) {
         if(targetPos == null) {
             Debug.Log("Null seek command!");
             return;
@@ -168,6 +197,6 @@ public class SteeringManager {
     }
     
     public bool IsValid(Vector2 vector) {
-        return true;    //WIP
+        return Vector2.Distance(worldCenter, vector) < distanceFromCenterWIP;
     }
 }
