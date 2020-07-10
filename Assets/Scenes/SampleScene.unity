@@ -363,6 +363,7 @@ GameObject:
   - component: {fileID: 634771652}
   - component: {fileID: 634771658}
   - component: {fileID: 634771657}
+  - component: {fileID: 634771659}
   m_Layer: 0
   m_Name: Chicken
   m_TagString: Player
@@ -493,6 +494,20 @@ MonoBehaviour:
   sightDistance: 0.5
   sightAngleDeg: 30
   distanceFromCenterWIP: 15
+--- !u!114 &634771659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 634771651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c70b37793840ca4fa5bb58fe83a3f6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabToSpawn: {fileID: 2162433631264805878, guid: d7eb7fca448cd0340aab2e6cc4058fe1,
+    type: 3}
 --- !u!1 &708630717
 GameObject:
   m_ObjectHideFlags: 0
