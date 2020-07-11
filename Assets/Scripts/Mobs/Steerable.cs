@@ -29,7 +29,7 @@ public class Steerable : MonoBehaviour
 
     void Update()
     {
-        if(!steering.IsValid(SteeringManager.ToVector2(myTransform.position))) {
+        if(!SteeringManager.IsValid(SteeringManager.ToVector2(myTransform.position))) {
             myTransform.position = lastGoodPosition;
         } else {
             lastGoodPosition = myTransform.position;

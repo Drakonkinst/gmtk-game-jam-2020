@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SteeringManager : MonoBehaviour {
-    private static readonly float MaxAngle = 2.0f * Mathf.PI; 
+    private static readonly float MaxAngle = 2.0f * Mathf.PI;
     
     public static Vector3 ToVector3(Vector2 vector) {
         return new Vector3(vector.x, 0.0f, vector.y);
@@ -18,6 +18,21 @@ public class SteeringManager : MonoBehaviour {
             return vector.normalized * max;
         }
         return vector;
+    }
+    
+    public static bool IsValid(Vector2 vector) {
+        Vector2 center = SceneManager.Instance.worldCenter;
+        float halfWidth = SceneManager.Instance.worldWidth / 2.0f;
+        float halfLength = SceneManager.Instance.worldLength / 2.0f;
+        float minX = center.x - halfWidth;
+        float minY = center.x - halfLength;
+        float maxX = center.x + halfWidth;
+        float maxY = center.x + halfLength;
+        
+        //Debug.Log("[" + minX + "," + maxX + "]; [" + minY + "," + maxY + "]");
+        
+        return (vector.x >= minX && vector.x <= maxX
+                && vector.y >= minY && vector.y <= maxY);
     }
 
     public GameObject host;
@@ -173,20 +188,5 @@ public class SteeringManager : MonoBehaviour {
         }
         
         return true;
-    }
-    
-    public bool IsValid(Vector2 vector) {
-        Vector2 center = SceneManager.Instance.worldCenter;
-        float halfWidth = SceneManager.Instance.worldWidth / 2.0f;
-        float halfLength = SceneManager.Instance.worldLength / 2.0f;
-        float minX = center.x - halfWidth;
-        float minY = center.x - halfLength;
-        float maxX = center.x + halfWidth;
-        float maxY = center.x + halfLength;
-        
-        //Debug.Log("[" + minX + "," + maxX + "]; [" + minY + "," + maxY + "]");
-        
-        return (vector.x >= minX && vector.x <= maxX
-                && vector.y >= minY && vector.y <= maxY);
     }
 }
