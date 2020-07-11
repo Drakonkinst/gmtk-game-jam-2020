@@ -1247,7 +1247,7 @@ MonoBehaviour:
   distance: 1
   height: 0.2
   lifetime: 0.5
-  knockBack: 0.25
+  knockBack: 0.4
 --- !u!4 &1100077471 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2132829222034946843, guid: e4277846f036a9444ba089ec04c76d28,
@@ -2443,6 +2443,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2132829222034946854, guid: e4277846f036a9444ba089ec04c76d28,
+        type: 3}
+      propertyPath: bulletSpeed
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4277846f036a9444ba089ec04c76d28, type: 3}
