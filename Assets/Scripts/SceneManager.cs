@@ -19,9 +19,7 @@ public class SceneManager : MonoBehaviour
     public float worldLength;
     
     
-    // Start is called before the first frame update
-    void Start()
-    {
+    void Awake() {
         if(Instance != null && Instance != this) {
             Destroy(gameObject);
         }
