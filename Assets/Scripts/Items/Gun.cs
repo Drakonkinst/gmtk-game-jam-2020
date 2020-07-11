@@ -45,6 +45,7 @@ public class Gun : MonoBehaviour
         if(rb != null) {
             rb.AddRelativeForce(Vector3.forward * speed, ForceMode.Impulse);
         }
+        // Most likely add a seek command in the opposite direction of the bullet fire
         StartCoroutine(BulletExpire(bullet, lifetime));
         playerRb.AddForce(this.transform.forward * -knockBack * 50.0f,ForceMode.Impulse); // Adds a force to the chicken opposite to the rotation of the gun
         return bullet;
