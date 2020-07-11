@@ -6,18 +6,17 @@ using UnityEngine;
 public class BulletBehavior : MonoBehaviour
 {
     public float speed = 1;
-    private Rigidbody myRb;
-    // Start is called before the first frame update
+    private Transform myTransform;
+
     void Start()
     {
-        myRb = GetComponent<Rigidbody>();
-        myRb.AddRelativeForce(Vector3.forward * 100.0f * speed * Time.deltaTime, ForceMode.Impulse);
+        myTransform = transform;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(Math.Abs(transform.position.x) > 50.0f || Math.Abs(transform.position.z) > 50.0f)
+        if(Math.Abs(myTransform.position.x) > 50.0f || Math.Abs(myTransform.position.z) > 50.0f)
         {
             Destroy(gameObject);
         }
