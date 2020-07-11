@@ -16,6 +16,7 @@ public class BarrelManager : MonoBehaviour
     public Material damagedState;
     public Material invisible;
     public GameObject child;
+    private ParticleSystem explosion;
     private float explosionDuration = 3.0f;
     private float explosionRadius = 50.0f;
     private GameObject[] barrelsInRadius;
@@ -26,6 +27,7 @@ public class BarrelManager : MonoBehaviour
         rend = GetComponent<Renderer>();
         rend.material = defaultState;
         health = healthMax;
+        explosion = Instantiate(child, this.transform).GetComponent<ParticleSystem>();
     }
     
     void OnTriggerEnter(Collider col) {
@@ -78,7 +80,7 @@ public class BarrelManager : MonoBehaviour
     IEnumerator Explode() {
         barrelsInRadius = GameObject.FindGameObjectsWithTag("Barrel");
         rend.material = invisible;
-        child.GetComponent<ParticleSystem>().Play();
+        explosion.GetComponent<ParticleSystem>().Play();
         Debug.Log("Barrels within range: " + barrelsInRadius);
         foreach(GameObject barrel in barrelsInRadius)
         {
