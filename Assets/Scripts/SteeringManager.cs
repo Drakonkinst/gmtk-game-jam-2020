@@ -29,9 +29,8 @@ public class SteeringManager : MonoBehaviour {
     public float wanderCircleDistance = 1.0f;
     public float wanderCircleRadius = 3.0f;
     public float maxAngleChangeDeg = 15.0f;
-    public float sightDistance = 5.0f;
+    public float sightDistance = 0.5f;
     public float sightAngleDeg = 30.0f;
-    public float distanceFromCenterWIP = 5.0f;
     
     private float maxAngleChange;
     private float halfSight;
@@ -184,6 +183,8 @@ public class SteeringManager : MonoBehaviour {
         float minY = center.x - halfLength;
         float maxX = center.x + halfWidth;
         float maxY = center.x + halfLength;
+        
+        //Debug.Log("[" + minX + "," + maxX + "]; [" + minY + "," + maxY + "]");
         
         return (vector.x >= minX && vector.x <= maxX
                 && vector.y >= minY && vector.y <= maxY);
