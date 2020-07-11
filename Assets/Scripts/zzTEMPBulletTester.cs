@@ -5,23 +5,22 @@ using UnityEngine;
 public class zzTEMPBulletTester : MonoBehaviour
 {
     public GameObject prefabToSpawn;
-    public Transform parentObject;
-    private Transform gunTransform;
+    //public Transform parentObject;
     private Transform myTransform;
     
     // Start is called before the first frame update
     void Start()
     {
         myTransform = transform;
-        gunTransform = GameObject.FindWithTag("Gun").transform;
     }
 
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Mouse0))
         {
-            GameObject bullet = Instantiate(prefabToSpawn, gunTransform);
-            bullet.transform.position = gunTransform.position;
+            Instantiate(prefabToSpawn, myTransform.position + new Vector3(0,0.25f,0), myTransform.rotation * Quaternion.Euler(new Vector3(0f, 90.0f, 0f))); // spawns a bullet at the object and 
+            //GameObject bullet = Instantiate(prefabToSpawn, parentObject);
+            //bullet.transform.position = gunTransform.position;
         }
     }
 

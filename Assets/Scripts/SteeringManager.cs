@@ -54,7 +54,7 @@ public class SteeringManager : MonoBehaviour {
         this.facing = 0.0f;
         
         if(hostTransform == null || hostRb == null) {
-            //Debug.LogError("Steering manager host missing transform and/or rigidbody!");
+            Debug.LogError("Steering manager host missing transform and/or rigidbody!");
         }
         
         Reset();
@@ -116,7 +116,7 @@ public class SteeringManager : MonoBehaviour {
     
     public void Seek(Vector2 targetPos, float slowingRadius = 5.0f) {
         if(targetPos == null) {
-            //Debug.Log("Null seek command!");
+            Debug.Log("Null seek command!");
             return;
         }
         

@@ -9,6 +9,8 @@ TagManager:
   - Barrel
   - Pickup
   - Bullet
+  - Gun
+  - Floor
   layers:
   - Default
   - TransparentFX
