@@ -6,7 +6,7 @@ public class Gun : MonoBehaviour
 {
     public GameObject bulletPrefab;
     public float fireRate = 0.5f;
-    
+    private Rigidbody playerRb;
     [System.NonSerialized]
     public Transform myTransform;
     
@@ -18,6 +18,7 @@ public class Gun : MonoBehaviour
         bulletParent = SceneManager.Instance.bulletParent;
         myTransform = transform;
         nextFire = Time.time;
+        playerRb = GameObject.FindWithTag("Player").GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -34,7 +35,7 @@ public class Gun : MonoBehaviour
         }
     }
     
-    public GameObject SpawnBullet(float distance, float height, Quaternion rotation, float speed, float lifetime) {
+    public GameObject SpawnBullet(float distance, float height, Quaternion rotation, float speed, float lifetime, float knockBack) {
         float angle = myTransform.eulerAngles.y * Mathf.Deg2Rad;
         float offsetX = Mathf.Sin(angle) * distance;
         float offsetZ = Mathf.Cos(angle) * distance;
@@ -45,6 +46,7 @@ public class Gun : MonoBehaviour
             rb.AddRelativeForce(Vector3.forward * speed, ForceMode.Impulse);
         }
         StartCoroutine(BulletExpire(bullet, lifetime));
+        playerRb.AddForce(this.transform.forward * -knockBack * 50.0f,ForceMode.Impulse); // Adds a force to the chicken opposite to the rotation of the gun
         return bullet;
     }
     
