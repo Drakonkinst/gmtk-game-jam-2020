@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,15 +16,19 @@ public class BulletBehavior : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        myRb.AddForce(Vector3.forward * 250 * speed * Time.deltaTime, ForceMode.Force);
+        myRb.AddRelativeForce(Vector3.forward * 250.0f * speed * Time.deltaTime, ForceMode.Force);
+        if(Math.Abs((transform.position.x + transform.position.z)/2) > 50.0f)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter(Collider col)
     {
-        if(col.gameObject.tag != "Player")
+        if(!(col.gameObject.tag == "Gun" && col.gameObject.tag == "Player" && col.gameObject.tag == "Bullet"))
         {
             Debug.Log("Bullet Collision with " + col.gameObject.name);
-            Destroy(gameObject); // When I collide with something, destroy myself
+            //Destroy(gameObject); // When I collide with something, destroy myself
         } 
     }
 }

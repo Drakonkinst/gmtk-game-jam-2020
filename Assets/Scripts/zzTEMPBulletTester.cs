@@ -6,23 +6,22 @@ public class zzTEMPBulletTester : MonoBehaviour
 {
     public GameObject prefabToSpawn;
     public Transform parentObject;
-    
+    private Transform gunTransform;
     private Transform myTransform;
     
     // Start is called before the first frame update
     void Start()
     {
         myTransform = transform;
+        gunTransform = GameObject.FindWithTag("Gun").transform;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Mouse0))
         {
-            GameObject bullet = Instantiate(prefabToSpawn, parentObject);
-            bullet.transform.position = myTransform.position;
-            
+            GameObject bullet = Instantiate(prefabToSpawn, gunTransform);
+            bullet.transform.position = gunTransform.position;
         }
     }
 

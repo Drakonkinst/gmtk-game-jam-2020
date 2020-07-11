@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Start");
+        //Debug.Log("Start");
         steering = GetComponent<SteeringManager>();
         if(steering == null) {
             Debug.LogError("No steering manager found!");
