@@ -10,7 +10,8 @@ public class Shotgun : Gun
     public float distance = 1.0f;
     public float height = 0.20f;
     public float lifetime = 0.5f;
-    public float knockBack = 0.25f;
+    public float knockBack = 0.5f;
+    public float fleeTime = 0.2f;
 
     public override void Fire() {
         Quaternion leftMost = myTransform.rotation * Quaternion.Euler(0f, -inaccuracy, 0f); 
@@ -20,6 +21,11 @@ public class Shotgun : Gun
         SpawnBullet(distance, height, myTransform.rotation * Quaternion.Euler(0f, UnityEngine.Random.Range(-inaccuracy,inaccuracy), 0f), bulletSpeed, lifetime, knockBack); // Creates three randomly inaccurate bullets within the same inaccuracy cone.
         SpawnBullet(distance, height, myTransform.rotation * Quaternion.Euler(0f, UnityEngine.Random.Range(-inaccuracy, inaccuracy), 0f), bulletSpeed, lifetime, knockBack);
         SpawnBullet(distance, height, myTransform.rotation * Quaternion.Euler(0f, UnityEngine.Random.Range(-inaccuracy, inaccuracy), 0f), bulletSpeed, lifetime, knockBack);
+        
+        PlayerMovement playerMvt = SceneManager.Instance.player.GetComponent<PlayerMovement>();
+        Vector3 fleeFrom = myTransform.forward + myTransform.position;
+        playerMvt.Flee(fleeFrom, fleeTime);
+        //Debug.Log("Fleeing from: " + fleeFrom);
         
     }
 }

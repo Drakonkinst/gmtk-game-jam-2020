@@ -81,6 +81,13 @@ public class SteeringManager : MonoBehaviour {
         }
     }
     
+    public void SetWanderAngleToFacing() {
+        Vector2 velocity = GetHostVelocity();
+        if(velocity.magnitude > 0) {
+            wanderAngle = Mathf.Atan2(velocity.y, velocity.x);
+        }
+    }
+    
     private void Reset() {
         steering = new Vector2();
     }
@@ -99,6 +106,7 @@ public class SteeringManager : MonoBehaviour {
         
         hostRb.velocity += ToVector3(steering);
         hostRb.velocity = ToVector3(Truncate(GetHostVelocity(), maxVelocity));
+        //Debug.Log(wanderAngle);
         
         UpdateFacing();
         Reset();
@@ -135,6 +143,13 @@ public class SteeringManager : MonoBehaviour {
         steering += fleeForce - GetHostVelocity();
     }
     
+    public void SetWanderAngle(float value) {
+        wanderAngle = value % MaxAngle;
+        if(wanderAngle < 0) {
+            wanderAngle += MaxAngle;
+        }
+    }
+    
     public void SetWanderAngle(Vector3 towards) {
         SetWanderAngle(ToVector2(towards));
     }
@@ -146,12 +161,7 @@ public class SteeringManager : MonoBehaviour {
     
     public void Wander() {
         Vector2 circleCenter = GetHostVelocity().normalized * wanderCircleDistance;
-        
-        wanderAngle += Random.Range(-maxAngleChange, maxAngleChange);
-        wanderAngle = wanderAngle % MaxAngle;
-        if(wanderAngle < 0) {
-            wanderAngle += MaxAngle;
-        }
+        SetWanderAngle(wanderAngle + Random.Range(-maxAngleChange, maxAngleChange));
         
         Vector2 displacement = new Vector2(Mathf.Cos(wanderAngle), Mathf.Sin(wanderAngle)) * wanderCircleRadius;
         steering += circleCenter + displacement;

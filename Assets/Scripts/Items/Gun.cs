@@ -45,21 +45,18 @@ public class Gun : MonoBehaviour
         if(rb != null) {
             rb.AddRelativeForce(Vector3.forward * speed, ForceMode.Impulse);
         }
-        float movementAngle = SceneManager.Instance.player.GetComponent<PlayerMovement>().steering.wanderAngle;
-        Debug.Log("Angle changed from: " + movementAngle);
-        float oppositeAngle = Mathf.Abs(Mathf.PI / 2 - movementAngle);
-        SceneManager.Instance.player.GetComponent<PlayerMovement>().steering.wanderAngle = oppositeAngle;
-        SceneManager.Instance.player.GetComponent<PlayerMovement>().steering.Seek(this.myTransform.forward * -1);
-        Debug.Log("To: " + SceneManager.Instance.player.GetComponent<PlayerMovement>().steering.wanderAngle);
         StartCoroutine(BulletExpire(bullet, lifetime));
-        player.GetComponent<Rigidbody>().AddForce(this.transform.forward * -knockBack * 50.0f,ForceMode.Impulse); // Adds a force to the chicken opposite to the rotation of the gun
+        
+        if(knockBack > 0) {
+            player.GetComponent<Rigidbody>().AddForce(this.transform.forward * -knockBack * 50.0f,ForceMode.Impulse); // Adds a force to the chicken opposite to the rotation of the gun 
+        }
         return bullet;
     }
     
     private IEnumerator BulletExpire(GameObject bullet, float seconds) {
         yield return new WaitForSeconds(seconds);
         if(bullet != null) {
-            Destroy(bullet);;
+            Destroy(bullet);
         }
     }
     
