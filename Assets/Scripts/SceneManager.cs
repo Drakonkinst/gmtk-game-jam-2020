@@ -21,6 +21,11 @@ public class SceneManager : MonoBehaviour
     [System.NonSerialized]
     public float worldLength;
     
+    public Vector2 GetRandomWorldPoint() {
+        float x = Random.Range(worldCenter.x - worldWidth / 2, worldCenter.x + worldWidth / 2);
+        float y = Random.Range(worldCenter.y - worldLength / 2, worldCenter.y + worldLength / 2);
+        return new Vector2(x, y);
+    }
     
     void Awake() {
         if(Instance != null && Instance != this) {
