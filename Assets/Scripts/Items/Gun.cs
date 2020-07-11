@@ -6,7 +6,7 @@ public class Gun : MonoBehaviour
 {
     public GameObject bulletPrefab;
     public float fireRate = 0.5f;
-    private Rigidbody playerRb;
+    private GameObject player;
     [System.NonSerialized]
     public Transform myTransform;
     
@@ -18,7 +18,7 @@ public class Gun : MonoBehaviour
         bulletParent = SceneManager.Instance.bulletParent;
         myTransform = transform;
         nextFire = Time.time;
-        playerRb = GameObject.FindWithTag("Player").GetComponent<Rigidbody>();
+        player = GameObject.FindWithTag("Player");
     }
 
     // Update is called once per frame
@@ -45,9 +45,14 @@ public class Gun : MonoBehaviour
         if(rb != null) {
             rb.AddRelativeForce(Vector3.forward * speed, ForceMode.Impulse);
         }
-        // Most likely add a seek command in the opposite direction of the bullet fire
+        float movementAngle = SceneManager.Instance.player.GetComponent<PlayerMovement>().steering.wanderAngle;
+        Debug.Log("Angle changed from: " + movementAngle);
+        float oppositeAngle = Mathf.Abs(Mathf.PI / 2 - movementAngle);
+        SceneManager.Instance.player.GetComponent<PlayerMovement>().steering.wanderAngle = oppositeAngle;
+        SceneManager.Instance.player.GetComponent<PlayerMovement>().steering.Seek(this.myTransform.forward * -1);
+        Debug.Log("To: " + SceneManager.Instance.player.GetComponent<PlayerMovement>().steering.wanderAngle);
         StartCoroutine(BulletExpire(bullet, lifetime));
-        playerRb.AddForce(this.transform.forward * -knockBack * 50.0f,ForceMode.Impulse); // Adds a force to the chicken opposite to the rotation of the gun
+        player.GetComponent<Rigidbody>().AddForce(this.transform.forward * -knockBack * 50.0f,ForceMode.Impulse); // Adds a force to the chicken opposite to the rotation of the gun
         return bullet;
     }
     
