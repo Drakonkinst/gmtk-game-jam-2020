@@ -6,8 +6,9 @@ public class BarrelManager : MonoBehaviour
 {
     public int healthMax = 4;
     public int health;
-    public float timeToBlink = 0.5f;
+    public float timeToBlink = 0.1f;
     private bool damaged = false;
+    private bool started = false;
     private Renderer rend;
     public Material defaultState;
     public Material damagedState;
@@ -23,33 +24,40 @@ public class BarrelManager : MonoBehaviour
     void OnTriggerEnter(Collider col) {
         if(col.gameObject.tag == "Bullet") { // Barrel takes damage when struck by bullet
             health--;
-            Debug.Log(health);
+            Debug.Log("Barrel Health: " + health);
+            CheckStatus();
         }
-        checkStatus();
     }
 
-    void checkStatus() {
-        if(health - 2 <= 0) {
-            damaged = true;
-            StartCoroutine("blinkRed");
-        }
-        else if (health <= 0) {
+    void CheckStatus() {
+
+        if (health <= 0)
+        {
             //explode();
-            damaged = false;
             Destroy(gameObject);
         }
+        if (health - 2 <= 0 && !started) {
+            started = true;
+            StartCoroutine("BlinkRed");
+        }
     }
 
-    IEnumerator blinkRed() {
-        while(damaged) {
-            yield return new WaitForSeconds(timeToBlink * 1000.0f);
-            if(rend.material == defaultState) {
+    IEnumerator BlinkRed() {
+        Debug.Log("Entered Coroutine.");
+        while((timeToBlink -= 0.05f) >= 0f) {
+            yield return new WaitForSeconds(timeToBlink);
+            damaged = !damaged;
+            if(!damaged) {
                 rend.material = damagedState;
+                Debug.Log("Changed to Magma.");
             }
             else {
                 rend.material = defaultState;
+                Debug.Log("Changed to Wooden.");
             }
         }
+        //explode();
+        Destroy(gameObject);
     }
 
     /*
