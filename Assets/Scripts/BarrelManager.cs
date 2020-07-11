@@ -55,12 +55,12 @@ public class BarrelManager : MonoBehaviour
             Explode();
         }
         if (health - 2 <= 0 && !started) {
-            started = true;
             StartCoroutine("BlinkRed");
         }
     }
 
     IEnumerator BlinkRed() {
+        started = true;
         Debug.Log("Entered Coroutine.");
         while((timeToBlink -= 0.1f) >= 0f) {
             yield return new WaitForSeconds(timeToBlink);
