@@ -14,6 +14,7 @@ public class BarrelManager : MonoBehaviour
     private Renderer rend;
     public Material defaultState;
     public Material damagedState;
+    public Texture barrelTexture;
     public Material invisible;
     public GameObject child;
     private ParticleSystem explosion;
@@ -25,7 +26,7 @@ public class BarrelManager : MonoBehaviour
     void Start()
     {
         rend = GetComponent<Renderer>();
-        rend.material = defaultState;
+        rend.material.mainTexture = barrelTexture;
         health = healthMax;
         explosion = Instantiate(child, this.transform).GetComponent<ParticleSystem>();
     }
@@ -66,11 +67,13 @@ public class BarrelManager : MonoBehaviour
             yield return new WaitForSeconds(timeToBlink);
             damaged = !damaged;
             if(damaged) {
-                rend.material = damagedState;
+                rend.material = defaultState;
+                rend.material.mainTexture = barrelTexture;
                 Debug.Log("Changed to Magma.");
             }
             else {
-                rend.material = defaultState;
+                rend.material = damagedState;
+                rend.material.mainTexture = barrelTexture;
                 Debug.Log("Changed to Wooden.");
             }
         }

@@ -111,6 +111,7 @@ MonoBehaviour:
   timeToBlink: 1
   defaultState: {fileID: 2100000, guid: 630a757766b4da24898ff391e769e86c, type: 2}
   damagedState: {fileID: 2100000, guid: 47b584ae2d5797e4babfe0ddc49a939b, type: 2}
+  barrelTexture: {fileID: 2800000, guid: 86cb4241ff752b34888259419e854ed7, type: 3}
   invisible: {fileID: 2100000, guid: 0753fc7058f431f49977ae981df1b03a, type: 2}
   child: {fileID: 159918, guid: a0040bf7072bc2f4e82d887d50a9c5e2, type: 3}
 --- !u!65 &65547484668382220
