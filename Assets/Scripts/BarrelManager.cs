@@ -20,7 +20,7 @@ public class BarrelManager : MonoBehaviour
         health = healthMax;
     }
     
-    void OnTriggerEnter(Collision col) {
+    void OnTriggerEnter(Collider col) {
         if(col.gameObject.tag == "Bullet") { // Barrel takes damage when struck by bullet
             health--;
             Debug.Log(health);
