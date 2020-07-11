@@ -6,7 +6,7 @@ public class BarrelManager : MonoBehaviour
 {
     public int healthMax = 4;
     public int health;
-    public float timeToBlink = 0.1f;
+    public float timeToBlink = 1f;
     private bool damaged = false;
     private bool started = false;
     private Renderer rend;
@@ -44,10 +44,10 @@ public class BarrelManager : MonoBehaviour
 
     IEnumerator BlinkRed() {
         Debug.Log("Entered Coroutine.");
-        while((timeToBlink -= 0.05f) >= 0f) {
+        while((timeToBlink -= 0.1f) >= 0f) {
             yield return new WaitForSeconds(timeToBlink);
             damaged = !damaged;
-            if(!damaged) {
+            if(damaged) {
                 rend.material = damagedState;
                 Debug.Log("Changed to Magma.");
             }
