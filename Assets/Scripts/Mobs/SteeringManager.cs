@@ -46,6 +46,7 @@ public class SteeringManager : MonoBehaviour {
     public float maxAngleChangeDeg = 15.0f;
     public float sightDistance = 0.5f;
     public float sightAngleDeg = 30.0f;
+    public bool ignoreWalls = false;
     
     private float maxAngleChange;
     private float halfSight;
@@ -169,6 +170,9 @@ public class SteeringManager : MonoBehaviour {
     
     // returns true if everything is good
     public bool CheckBounds() {
+        if(ignoreWalls) {
+            return true;
+        }
         Vector2 hostPos = GetHostPos();
         Vector2 ahead = GetHostVelocity() * sightDistance;
         Vector2 ahead2 = ahead / 2.0f;

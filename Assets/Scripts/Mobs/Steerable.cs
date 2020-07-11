@@ -23,13 +23,13 @@ public class Steerable : MonoBehaviour
         }
         model = myTransform.Find(modelName);
         if(model == null) {
-            Debug.LogError("No steerable model found!");
+            Debug.LogWarning("No steerable model found!");
         }
     }
 
     void Update()
     {
-        if(!SteeringManager.IsValid(SteeringManager.ToVector2(myTransform.position))) {
+        if(!SteeringManager.IsValid(SteeringManager.ToVector2(myTransform.position)) && !steering.ignoreWalls) {
             myTransform.position = lastGoodPosition;
         } else {
             lastGoodPosition = myTransform.position;
@@ -39,7 +39,9 @@ public class Steerable : MonoBehaviour
             DoBehavior();
         }
         
-        model.rotation = Quaternion.Euler(0, -steering.facing * Mathf.Rad2Deg, 0);
+        if(model != null) {
+            model.rotation = Quaternion.Euler(0, -steering.facing * Mathf.Rad2Deg, 0);
+        }
         steering.UpdateSteering();
     }
     
