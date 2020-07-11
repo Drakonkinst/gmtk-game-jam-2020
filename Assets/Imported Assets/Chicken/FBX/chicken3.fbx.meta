@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 8ccfd5871ade98243a1da2f5f579d4f7
+guid: 9c100eb86a6d15c419e84d22071a7e38
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: Armature
-    100002: Rig
+    100002: //RootNode
     100004: RigHead
     100006: RigHead_end
     100008: RigLArm1
@@ -35,9 +35,8 @@ ModelImporter:
     100058: RigTail2
     100060: RigTail2_end
     100062: Toon Chicken
-    100064: //RootNode
     400000: Armature
-    400002: Rig
+    400002: //RootNode
     400004: RigHead
     400006: RigHead_end
     400008: RigLArm1
@@ -68,14 +67,10 @@ ModelImporter:
     400058: RigTail2
     400060: RigTail2_end
     400062: Toon Chicken
-    400064: //RootNode
     2100000: 'Material #2'
-    2100002: 'Material #2.001'
     4300000: Toon Chicken
-    7400000: Rig|Rig|Take 001|BaseLayer
-    7400002: Armature|Armature|Take 001|BaseLayer
-    7400004: Armature|Rig|Take 001|BaseLayer
-    7400006: Armature|Armature|Take 001|BaseLayer (1)
+    7400000: Armature|Armature|Take 001|BaseLayer
+    7400002: Armature|Rig|Take 001|BaseLayer
     9500000: //RootNode
     13700000: Toon Chicken
   externalObjects: {}
@@ -105,91 +100,7 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations:
-    - serializedVersion: 16
-      name: Armature|Armature|Take 001|BaseLayer (1)
-      takeName: Armature|Armature|Take 001|BaseLayer
-      firstFrame: 0
-      lastFrame: 12
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Armature|Armature|Take 001|BaseLayer
-      takeName: Armature|Armature|Take 001|BaseLayer
-      firstFrame: 0
-      lastFrame: 12
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Armature|Rig|Take 001|BaseLayer
-      takeName: Armature|Rig|Take 001|BaseLayer
-      firstFrame: 0
-      lastFrame: 12
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+    clipAnimations: []
     isReadable: 1
   meshes:
     lODScreenPercentages: []
