@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 9170033683484992636}
   - component: {fileID: 1458524393887191102}
   - component: {fileID: 114590306575169878}
+  - component: {fileID: 65547484668382220}
   m_Layer: 0
   m_Name: Barrel
-  m_TagString: Untagged
+  m_TagString: Barrel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -59,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c49b3b1397fd6f24ebacbe4ddd87e8a8, type: 2}
+  - {fileID: 2100000, guid: 630a757766b4da24898ff391e769e86c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -110,3 +111,18 @@ MonoBehaviour:
   timeToBlink: 1
   defaultState: {fileID: 2100000, guid: 630a757766b4da24898ff391e769e86c, type: 2}
   damagedState: {fileID: 2100000, guid: 47b584ae2d5797e4babfe0ddc49a939b, type: 2}
+  invisible: {fileID: 2100000, guid: 0753fc7058f431f49977ae981df1b03a, type: 2}
+  child: {fileID: 0}
+--- !u!65 &65547484668382220
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6488317785129330039}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0000001, y: 2, z: 1.0000002}
+  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
@@ -7,15 +8,17 @@ public class BarrelManager : MonoBehaviour
 {
     public int healthMax = 4;
     public int health;
-    public float timeToBlink = 1f;
+    public float timeToBlink = 0.5f;
     private bool damaged = false;
     private bool started = false;
     private Renderer rend;
     public Material defaultState;
     public Material damagedState;
     public Material invisible;
-    public ParticleSystem explosion;
+    public GameObject child;
     private float explosionDuration = 3.0f;
+    private float explosionRadius = 50.0f;
+    private GameObject[] barrelsInRadius;
     
     // Start is called before the first frame update
     void Start()
@@ -23,7 +26,6 @@ public class BarrelManager : MonoBehaviour
         rend = GetComponent<Renderer>();
         rend.material = defaultState;
         health = healthMax;
-        explosion = GameObject.FindWithTag("Explosion").GetComponent<ParticleSystem>();
     }
     
     void OnTriggerEnter(Collider col) {
@@ -34,11 +36,21 @@ public class BarrelManager : MonoBehaviour
         }
     }
 
+    public void SetHealth(int hp)
+    {
+        health = hp;
+    }
+
+    public void LightFuse()
+    {
+        StartCoroutine("BlinkRed");
+    }
+
     void CheckStatus() {
 
         if (health <= 0)
         {
-            explode();
+            Explode();
         }
         if (health - 2 <= 0 && !started) {
             started = true;
@@ -60,12 +72,30 @@ public class BarrelManager : MonoBehaviour
                 Debug.Log("Changed to Wooden.");
             }
         }
-        StartCoroutine("explode");
+        StartCoroutine("Explode");
     }
 
-    IEnumerator explode() {
+    IEnumerator Explode() {
+        barrelsInRadius = GameObject.FindGameObjectsWithTag("Barrel");
         rend.material = invisible;
-        explosion.Play();
+        child.GetComponent<ParticleSystem>().Play();
+        Debug.Log("Barrels within range: " + barrelsInRadius);
+        foreach(GameObject barrel in barrelsInRadius)
+        {
+            float distance = Vector3.Distance(this.transform.position, barrel.transform.position);
+            Debug.Log("Distance: " + distance);
+            if (barrel != this && (distance <= explosionRadius))
+            {
+                BarrelManager bm = barrel.GetComponent<BarrelManager>();
+                if(bm.damaged == false)
+                {
+                    bm.damaged = true;
+                    bm.SetHealth(2);
+                    bm.LightFuse();
+                }
+                
+            }
+        }
         yield return new WaitForSeconds(explosionDuration);
         Destroy(gameObject);
     }
