@@ -18,7 +18,7 @@ public class zzTEMPBulletTester : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Mouse0))
         {
-            Instantiate(prefabToSpawn, myTransform.position + new Vector3(0.0f, 0.25f, 0.0f), myTransform.rotation * Quaternion.Euler(new Vector3(0.0f, 90.0f, 0.0f))); // spawns a bullet at the object and 
+            Instantiate(prefabToSpawn, myTransform.position + new Vector3(0.0f, 0.25f, 0.0f), myTransform.rotation); // spawns a bullet at the object and 
             //GameObject bullet = Instantiate(prefabToSpawn, parentObject);
             //bullet.transform.position = gunTransform.position;
         }
