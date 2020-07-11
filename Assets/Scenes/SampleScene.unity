@@ -911,11 +911,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gun: {fileID: 1100077471}
-<<<<<<< Updated upstream
---- !u!1 &669679790
-=======
 --- !u!1 &677414168
->>>>>>> Stashed changes
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -923,43 +919,25 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-<<<<<<< Updated upstream
   - component: {fileID: 669679791}
   m_Layer: 0
   m_Name: Bullet Hell
-=======
   - component: {fileID: 677414169}
   - component: {fileID: 677414171}
   - component: {fileID: 677414170}
   m_Layer: 5
   m_Name: Shell1
->>>>>>> Stashed changes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
-<<<<<<< Updated upstream
---- !u!4 &669679791
-Transform:
-=======
 --- !u!224 &677414169
 RectTransform:
->>>>>>> Stashed changes
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
-  m_GameObject: {fileID: 669679790}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-=======
   m_GameObject: {fileID: 677414168}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -1008,7 +986,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 677414168}
   m_CullTransparentMesh: 0
->>>>>>> Stashed changes
 --- !u!1 &708630717
 GameObject:
   m_ObjectHideFlags: 0
@@ -1375,14 +1352,10 @@ MonoBehaviour:
   spawnParent: {fileID: 669679791}
   bulletPrefab: {fileID: 2162433631264805878, guid: d7eb7fca448cd0340aab2e6cc4058fe1,
     type: 3}
-<<<<<<< Updated upstream
   fireRate: 0.5
   bulletSpeed: 10
   inaccuracy: 5
   offset: {x: 0, y: 0.25, z: 0}
-=======
-  inaccuracy: 5
->>>>>>> Stashed changes
 --- !u!1 &1117923144
 GameObject:
   m_ObjectHideFlags: 0
