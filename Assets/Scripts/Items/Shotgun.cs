@@ -16,12 +16,12 @@ public class Shotgun : Gun
     //private bool reloaing = false;
     public int ammo = 2;
 
-    public override void Fire() {
+    public override bool Fire() {
         if(ammo <= 0) // && !reloading
         {
             //reloaing = true;
             //StartCoroutine("Reload");
-            return;
+            return false;
         }
         Quaternion leftMost = myTransform.rotation * Quaternion.Euler(0f, -inaccuracy, 0f); 
         Quaternion rightMost = myTransform.rotation * Quaternion.Euler(0f, inaccuracy, 0f); 
@@ -34,14 +34,15 @@ public class Shotgun : Gun
         PlayerMovement playerMvt = SceneManager.Instance.player.GetComponent<PlayerMovement>();
         Vector3 fleeFrom = myTransform.forward + myTransform.position;
         playerMvt.Flee(fleeFrom, fleeTime);
+        return true;
         //Debug.Log("Fleeing from: " + fleeFrom);
         
     }
-
-    /*IEnumerator Reload()
-    {
-        // rotate gun downward 
-        yield return new WaitForSeconds(reloadTime);
-        ammo = 
-    }*/
+    
+    public override void SetRenderer(bool flag) {
+        Transform model = transform.Find("Shotgun");
+        model.GetComponent<MeshRenderer>().enabled = flag;
+        model.Find("Pump_Loader").GetComponent<MeshRenderer>().enabled = flag;
+        model.Find("Shotgun_Shell").GetComponent<MeshRenderer>().enabled = flag;
+    }
 }

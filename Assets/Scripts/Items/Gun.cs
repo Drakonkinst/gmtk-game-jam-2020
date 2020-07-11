@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
+    public static Gun activeGun;
+    public static List<Gun> guns = new List<Gun>();
     public GameObject bulletPrefab;
     public float fireRate = 0.5f;
     public KeyCode button = KeyCode.Mouse0;
@@ -14,12 +16,20 @@ public class Gun : MonoBehaviour
     private Transform bulletParent;
     private float nextFire;
     // Start is called before the first frame update
+    void Awake() {
+        guns.Add(this);
+    }
+    
     void Start()
     {
         bulletParent = SceneManager.Instance.bulletParent;
         myTransform = transform;
         nextFire = Time.time;
-        player = GameObject.FindWithTag("Player");
+        player = SceneManager.Instance.player;
+        if(this is Pistol) {
+            //Debug.Log("Found pistol!");
+            SetThisToActiveGun();
+        }
     }
 
     // Update is called once per frame
@@ -32,6 +42,17 @@ public class Gun : MonoBehaviour
             if(currTime > nextFire) {
                 nextFire = currTime + fireRate;
                 Fire();
+                SetThisToActiveGun();
+            }
+        }
+    }
+    
+    private void SetThisToActiveGun() {
+        activeGun = this;
+        SetRenderer(true);
+        for(int i = 0; i < guns.Count; i++) {
+            if(guns[i] != this) {
+                guns[i].SetRenderer(false);
             }
         }
     }
@@ -61,8 +82,11 @@ public class Gun : MonoBehaviour
         }
     }
     
-    public virtual void Fire() {
+    public virtual void SetRenderer(bool flag) {}
+    
+    public virtual bool Fire() {
         // I refuse to do anything >:) Go implement your own firing code buddy
+        return false;
     }
     
     
