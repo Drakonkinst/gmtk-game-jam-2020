@@ -8,8 +8,9 @@ public class Shotgun : Gun
     public float inaccuracy = 5.0f;
     public float distance = 1.0f;
     public float height = 0.20f;
+    public float lifetime = 0.5f;
     
     public override void Fire() {
-        SpawnBullet(distance, height, myTransform.rotation, bulletSpeed);
+        SpawnBullet(distance, height, myTransform.rotation, bulletSpeed, lifetime);
     }
 }

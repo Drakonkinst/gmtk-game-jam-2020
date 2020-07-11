@@ -34,7 +34,7 @@ public class Gun : MonoBehaviour
         }
     }
     
-    public GameObject SpawnBullet(float distance, float height, Quaternion rotation, float speed) {
+    public GameObject SpawnBullet(float distance, float height, Quaternion rotation, float speed, float lifetime) {
         float angle = myTransform.eulerAngles.y * Mathf.Deg2Rad;
         float offsetX = Mathf.Sin(angle) * distance;
         float offsetZ = Mathf.Cos(angle) * distance;
@@ -44,7 +44,15 @@ public class Gun : MonoBehaviour
         if(rb != null) {
             rb.AddRelativeForce(Vector3.forward * speed, ForceMode.Impulse);
         }
+        StartCoroutine(BulletExpire(bullet, lifetime));
         return bullet;
+    }
+    
+    private IEnumerator BulletExpire(GameObject bullet, float seconds) {
+        yield return new WaitForSeconds(seconds);
+        if(bullet != null) {
+            Destroy(bullet);;
+        }
     }
     
     public virtual void Fire() {
