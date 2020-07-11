@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7999573053869482437}
   - component: {fileID: 9170033683484992636}
   - component: {fileID: 1458524393887191102}
+  - component: {fileID: 114590306575169878}
   m_Layer: 0
   m_Name: Barrel
   m_TagString: Untagged
@@ -27,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6488317785129330039}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 24.08854, y: -17.343996, z: -2.0925083}
-  m_LocalScale: {x: 1, y: 0.8, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1.6335098, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -58,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c49b3b1397fd6f24ebacbe4ddd87e8a8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -92,3 +93,20 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &114590306575169878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6488317785129330039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 330579861c205c344a81fa5cb93df4f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthMax: 4
+  health: 0
+  timeToBlink: 0.5
+  defaultState: {fileID: 2100000, guid: 630a757766b4da24898ff391e769e86c, type: 2}
+  damagedState: {fileID: 2100000, guid: 47b584ae2d5797e4babfe0ddc49a939b, type: 2}
