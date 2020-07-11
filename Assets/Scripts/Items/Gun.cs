@@ -33,8 +33,12 @@ public class Gun : MonoBehaviour
         }
     }
     
-    public GameObject SpawnBullet(Vector3 position, Quaternion rotation, float speed) {
-        GameObject bullet = Instantiate(bulletPrefab, position, rotation, spawnParent);
+    public GameObject SpawnBullet(float distance, float height, Quaternion rotation, float speed) {
+        float angle = myTransform.eulerAngles.y * Mathf.Deg2Rad;
+        float offsetX = Mathf.Sin(angle) * distance;
+        float offsetZ = Mathf.Cos(angle) * distance;
+        
+        GameObject bullet = Instantiate(bulletPrefab, myTransform.position + new Vector3(offsetX, height, offsetZ), rotation, spawnParent);
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         if(rb != null) {
             rb.AddRelativeForce(Vector3.forward * speed, ForceMode.Impulse);
