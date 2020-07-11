@@ -8,22 +8,21 @@ public class GunController : MonoBehaviour
 {
     private Transform playerTransform;
     private Transform myTransform;
-    private Vector3 offset;
+    private Vector3 offset = new Vector3(0.0f, 1.5f, 0.0f);
     // Start is called before the first frame update
     void Start()
     {
-        playerTransform = GameObject.FindWithTag("Player").transform;
+        playerTransform = SceneManager.Instance.playerTransform;
         myTransform = transform;
-        offset = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        setPosition();
+        SetPosition();
     }
 
-    void setPosition() {
-        transform.position = playerTransform.position + new Vector3(0,1.5f,0);
+    private void SetPosition() {
+        transform.position = playerTransform.position + offset;
     }
 }
