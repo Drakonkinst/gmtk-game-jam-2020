@@ -9,7 +9,7 @@ public class Pistol : Gun
     public float distance = 1.0f;
     public float height = 0.20f;
     public float lifetime = 5.0f;
-    public float knockBack = 0.5f;
+    public float knockBack = 0.0f;
 
     public override void Fire()
     {

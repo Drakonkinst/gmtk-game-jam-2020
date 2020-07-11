@@ -239,7 +239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   modelName: Model
-  minTrackingDistance: 2
+  minTrackingDistance: 5
   slowingDistance: 1
 --- !u!114 &114814853019900346
 MonoBehaviour:
