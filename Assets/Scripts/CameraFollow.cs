@@ -2,22 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraFollow : MonoBehaviour
+public class CameraFollow : Steerable
 {
     public Transform following;
     public float offset = 6;
     public float height = 10;
+    public float slowingDist = 0.2f;
     
-    private Transform myTransform;
-    // Start is called before the first frame update
-    void Start()
-    {
-        myTransform = transform;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        myTransform.position = following.position + new Vector3(-offset, height, -offset);
+    public override void DoBehavior() {
+        Vector3 seeking = following.position + new Vector3(-offset, height, -offset);
+        steering.Seek(seeking, slowingDist);
     }
 }
