@@ -28,6 +28,9 @@ public class BulletBehavior : MonoBehaviour
         {
             Debug.Log("Bullet Collision with " + col.gameObject.name);
             Destroy(gameObject); // When I collide with something, destroy myself
+            if(col.gameObject.GetComponent<Breakable>() != null) {
+                col.gameObject.GetComponent<Breakable>().Damage(1);
+            }
         } 
     }
 }
