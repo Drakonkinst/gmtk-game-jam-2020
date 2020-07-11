@@ -59,24 +59,6 @@ public class SteeringManager : MonoBehaviour {
         
         Reset();
     }
-    /**
-    public SteeringManager(GameObject host) {
-        this.maxAngleChange = maxAngleChangeDeg * Mathf.Deg2Rad;
-        this.halfSight = sightDistance / 2.0f;
-        this.sightAngle = sightAngleDeg * Mathf.Deg2Rad;
-        
-        this.host = host;
-        this.hostTransform = host.transform;
-        this.hostRb = host.GetComponent<Rigidbody>();
-        this.wanderAngle = Random.Range(0.0f, MaxAngle);
-        this.facing = 0.0f;
-        
-        if(hostTransform == null || hostRb == null) {
-            Debug.Log("Steering manager missing transform and/or rigidbody!");
-        }
-        
-        Reset();
-    }*/
     
     private void UpdateFacing() {
         Vector2 velocity = GetHostVelocity();
@@ -104,9 +86,7 @@ public class SteeringManager : MonoBehaviour {
         hostRb.velocity += ToVector3(steering);
         hostRb.velocity = ToVector3(Truncate(GetHostVelocity(), maxVelocity));
         
-        // probably want to call this on the host later
         UpdateFacing();
-        //hostTransform.position += hostRb.velocity // I think this is done automatically in Unity
         Reset();
     }
     
@@ -116,7 +96,7 @@ public class SteeringManager : MonoBehaviour {
     
     public void Seek(Vector2 targetPos, float slowingRadius = 5.0f) {
         if(targetPos == null) {
-            Debug.Log("Null seek command!");
+            Debug.LogWarning("Null seek command!");
             return;
         }
         

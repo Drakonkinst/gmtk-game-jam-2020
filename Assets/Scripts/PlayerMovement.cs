@@ -33,9 +33,6 @@ public class PlayerMovement : MonoBehaviour
         }
         
         model.rotation = Quaternion.Euler(0, -steering.facing * Mathf.Rad2Deg, 0);
-        //if(moveDirection != Vector3.zero) {
-            //transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(moveDirection), rotationSpeed * Time.deltaTime);
-        //}
         steering.UpdateSteering();
     }
     
