@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class BarrelManager : MonoBehaviour
@@ -12,13 +13,17 @@ public class BarrelManager : MonoBehaviour
     private Renderer rend;
     public Material defaultState;
     public Material damagedState;
-
+    public Material invisible;
+    public ParticleSystem explosion;
+    private float explosionDuration = 3.0f;
+    
     // Start is called before the first frame update
     void Start()
     {
         rend = GetComponent<Renderer>();
         rend.material = defaultState;
         health = healthMax;
+        explosion = GameObject.FindWithTag("Explosion").GetComponent<ParticleSystem>();
     }
     
     void OnTriggerEnter(Collider col) {
@@ -33,8 +38,7 @@ public class BarrelManager : MonoBehaviour
 
         if (health <= 0)
         {
-            //explode();
-            Destroy(gameObject);
+            explode();
         }
         if (health - 2 <= 0 && !started) {
             started = true;
@@ -56,13 +60,14 @@ public class BarrelManager : MonoBehaviour
                 Debug.Log("Changed to Wooden.");
             }
         }
-        //explode();
-        Destroy(gameObject);
+        StartCoroutine("explode");
     }
 
-    /*
-    void explode() {
-        
+    IEnumerator explode() {
+        rend.material = invisible;
+        explosion.Play();
+        yield return new WaitForSeconds(explosionDuration);
+        Destroy(gameObject);
     }
-    */
+    
 }

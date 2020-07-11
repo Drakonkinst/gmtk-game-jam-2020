@@ -11,6 +11,7 @@ public class BulletBehavior : MonoBehaviour
     void Start()
     {
         myTransform = transform;
+        
     }
 
     // Update is called once per frame
