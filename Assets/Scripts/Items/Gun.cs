@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-    public Transform spawnParent;
     public GameObject bulletPrefab;
     public float fireRate = 0.5f;
     
     [System.NonSerialized]
     public Transform myTransform;
     
+    private Transform bulletParent;
     private float nextFire;
     // Start is called before the first frame update
     void Start()
     {
+        bulletParent = SceneManager.Instance.bulletParent;
         myTransform = transform;
         nextFire = Time.time;
     }
@@ -38,7 +39,7 @@ public class Gun : MonoBehaviour
         float offsetX = Mathf.Sin(angle) * distance;
         float offsetZ = Mathf.Cos(angle) * distance;
         
-        GameObject bullet = Instantiate(bulletPrefab, myTransform.position + new Vector3(offsetX, height, offsetZ), rotation, spawnParent);
+        GameObject bullet = Instantiate(bulletPrefab, myTransform.position + new Vector3(offsetX, height, offsetZ), rotation, bulletParent);
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         if(rb != null) {
             rb.AddRelativeForce(Vector3.forward * speed, ForceMode.Impulse);

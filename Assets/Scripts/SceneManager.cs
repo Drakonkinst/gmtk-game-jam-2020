@@ -8,6 +8,9 @@ public class SceneManager : MonoBehaviour
     
     public GameObject player;
     public GameObject ground;
+    public GameObject gunPlane;
+    public Transform bulletParent;
+    
     public Vector2 worldCenter = new Vector2(0, 0);
     [System.NonSerialized]
     public Transform playerTransform;

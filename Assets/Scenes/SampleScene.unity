@@ -348,7 +348,7 @@ GameObject:
   - component: {fileID: 501023921}
   m_Layer: 0
   m_Name: Gun Plane
-  m_TagString: Untagged
+  m_TagString: Gun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -595,7 +595,7 @@ GameObject:
   - component: {fileID: 588821083}
   m_Layer: 0
   m_Name: Barrel
-  m_TagString: Untagged
+  m_TagString: Gun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -908,6 +908,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e8f55dca0846d884fb009033f558ffb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
   m_Name: 
   m_EditorClassIdentifier: 
   m_Name: 
@@ -1308,7 +1322,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c70b37793840ca4fa5bb58fe83a3f6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnParent: {fileID: 1119628753}
   bulletPrefab: {fileID: 2162433631264805878, guid: d7eb7fca448cd0340aab2e6cc4058fe1,
     type: 3}
   fireRate: 0.5
@@ -1954,7 +1967,7 @@ GameObject:
   - component: {fileID: 1773397702}
   m_Layer: 0
   m_Name: Handle
-  m_TagString: Untagged
+  m_TagString: Gun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2148,6 +2161,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 644097632}
   ground: {fileID: 708630717}
+  gunPlane: {fileID: 501023919}
+  bulletParent: {fileID: 1119628753}
   worldCenter: {x: 0, y: 0}
 --- !u!1 &1891123767
 GameObject:
