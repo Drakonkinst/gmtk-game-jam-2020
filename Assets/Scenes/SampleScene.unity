@@ -1023,13 +1023,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 2162433631264805878, guid: d7eb7fca448cd0340aab2e6cc4058fe1,
     type: 3}
-  fireRate: 0.5
+  fireRate: 0.2
+  button: 324
   bulletSpeed: 50
   inaccuracy: 10
   distance: 1
   height: 0.2
-  lifetime: 0.1
-  knockBack: 0.6
+  lifetime: 0.075
+  knockBack: 1
   fleeTime: 0.2
 --- !u!1 &708630717
 GameObject:
@@ -2447,7 +2448,7 @@ PrefabInstance:
     - target: {fileID: 2132829222034946842, guid: e4277846f036a9444ba089ec04c76d28,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2132829222034946843, guid: e4277846f036a9444ba089ec04c76d28,
         type: 3}

@@ -6,6 +6,7 @@ public class Gun : MonoBehaviour
 {
     public GameObject bulletPrefab;
     public float fireRate = 0.5f;
+    public KeyCode button = KeyCode.Mouse0;
     private GameObject player;
     [System.NonSerialized]
     public Transform myTransform;
@@ -25,7 +26,7 @@ public class Gun : MonoBehaviour
     void Update()
     {
         UpdateGunPosition();
-        if(Input.GetKey(KeyCode.Mouse0))
+        if(Input.GetKey(button))
         {
             float currTime = Time.time;
             if(currTime > nextFire) {
@@ -48,7 +49,7 @@ public class Gun : MonoBehaviour
         StartCoroutine(BulletExpire(bullet, lifetime));
         
         if(knockBack > 0) {
-            player.GetComponent<Rigidbody>().AddForce(this.transform.forward * -knockBack * 50.0f,ForceMode.Impulse); // Adds a force to the chicken opposite to the rotation of the gun 
+            player.GetComponent<Rigidbody>().AddForce(myTransform.forward * -knockBack * 50.0f, ForceMode.Impulse); // Adds a force to the chicken opposite to the rotation of the gun 
         }
         return bullet;
     }

@@ -217,7 +217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80dd4e17255bb2645b7529bfbac526e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  host: {fileID: 0}
+  host: {fileID: 1559310561354305718}
   facing: 0
   maxForce: 10
   maxVelocity: 2
