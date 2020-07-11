@@ -16,8 +16,8 @@ public class BulletBehavior : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        myRb.AddRelativeForce(Vector3.forward * 250.0f * speed * Time.deltaTime, ForceMode.Force);
-        if(Math.Abs((transform.position.x + transform.position.z)/2) > 50.0f)
+        myRb.AddRelativeForce(Vector3.forward * 100.0f * speed * Time.deltaTime, ForceMode.Impulse);
+        if(Math.Abs(transform.position.x) > 50.0f || Math.Abs(transform.position.z) > 50.0f)
         {
             Destroy(gameObject);
         }
