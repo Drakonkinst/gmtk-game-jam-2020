@@ -23,5 +23,4 @@ public class zzTEMPBulletTester : MonoBehaviour
             //bullet.transform.position = gunTransform.position;
         }
     }
-
 }

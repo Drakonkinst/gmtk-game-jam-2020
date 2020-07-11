@@ -646,7 +646,7 @@ MonoBehaviour:
   host: {fileID: 644097632}
   facing: 0
   maxForce: 10
-  maxVelocity: 20
+  maxVelocity: 2
   wanderCircleDistance: 1
   wanderCircleRadius: 3
   maxAngleChangeDeg: 15
