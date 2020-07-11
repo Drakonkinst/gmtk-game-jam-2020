@@ -41,8 +41,10 @@ public class Gun : MonoBehaviour
             float currTime = Time.time;
             if(currTime > nextFire) {
                 nextFire = currTime + fireRate;
-                Fire();
-                SetThisToActiveGun();
+                bool fired = Fire();
+                if(fired) {
+                    SetThisToActiveGun();
+                }
             }
         }
     }

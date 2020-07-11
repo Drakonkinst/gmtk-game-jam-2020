@@ -19,7 +19,8 @@ public class Pistol : Gun
     }
     
     public override void SetRenderer(bool flag) {
-        myTransform.Find("Barrel").GetComponent<MeshRenderer>().enabled = flag;
-        myTransform.Find("Handle").GetComponent<MeshRenderer>().enabled = flag;
+        Transform model = transform.Find("Handgun");
+        model.Find("Magazine").GetComponent<MeshRenderer>().enabled = flag;
+        model.Find("Slide").GetComponent<MeshRenderer>().enabled = flag;
     }
 }
