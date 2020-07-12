@@ -1257,7 +1257,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press space to return...
+  m_text: Press LMB to return...
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1291,7 +1291,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 2
+  m_fontStyle: 0
   m_textAlignment: 258
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -1326,7 +1326,7 @@ MonoBehaviour:
   m_margin: {x: 5.0363216, y: 0, z: 5.012494, w: 0}
   m_textInfo:
     textComponent: {fileID: 875182357}
-    characterCount: 24
+    characterCount: 22
     spriteCount: 0
     spaceCount: 3
     wordCount: 4

@@ -10,7 +10,7 @@ public class MenuButtonSpace : MonoBehaviour
     void Update()
     {
         //Debug.Log("Reached update");
-        if(Input.GetKeyDown(KeyCode.Space)) {
+        if(Input.GetKeyDown(KeyCode.Mouse0)) {
             //Debug.Log("Transitioning to TitleScene");
             UnityEngine.SceneManagement.SceneManager.LoadScene("TitleScene");
         }

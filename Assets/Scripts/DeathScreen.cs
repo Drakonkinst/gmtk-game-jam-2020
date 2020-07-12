@@ -24,6 +24,8 @@ public class DeathScreen : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space)) {
             PlayerPrefs.SetInt("player_score", 0);
             UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene");
+        } else if(Input.GetKeyDown(KeyCode.Escape)) {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("TitleScene");
         }
     }
 }
