@@ -156,3 +156,4 @@ MonoBehaviour:
   tickRate: 0.5
   damage: 2
   distance: 2.5
+  sizzleSound: {fileID: 8300000, guid: 5f6b7910740d82f4090667093b7efea6, type: 3}

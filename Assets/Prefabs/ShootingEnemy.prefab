@@ -222,6 +222,7 @@ MonoBehaviour:
   lifetime: 5
   shotDelay: 0.5
   bulletParent: {fileID: 0}
+  fireSound: {fileID: 8300000, guid: 9aa3ddffc48c4764c8358b1f3319e438, type: 3}
 --- !u!1 &4646302076061597465
 GameObject:
   m_ObjectHideFlags: 0

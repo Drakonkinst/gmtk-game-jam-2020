@@ -39,6 +39,8 @@ public class SceneManager : MonoBehaviour
     public float playerHealthGain = 20.0f;
     public int numShellsOnReload = 5;
     public int numEnemyBoost = 10;
+    public float damageSoundCooldown = 2.0f;
+    public AudioClip damageSound;
     
     public Vector2 worldCenter = new Vector2(0, 0);
     [System.NonSerialized]
@@ -54,7 +56,15 @@ public class SceneManager : MonoBehaviour
     
     private float healthBarWidth;
     private int score = 0;
+    private float nextDamageSound;
     
+    public void PlayDamageSound() {
+        float currTime = Time.time;
+        if(currTime > nextDamageSound) {
+            SoundManager.Instance.Play(damageSound, camera.transform);
+            nextDamageSound = currTime + damageSoundCooldown;
+        }
+    }
     public void SpawnEnemies() {
         if(EnemySpawnManager.Instance == null) {
             return;
@@ -145,6 +155,7 @@ public class SceneManager : MonoBehaviour
         worldLength = size.z;
         Debug.Log(worldWidth + " x " + worldLength);
         healthBarWidth = healthBar.GetComponent<RectTransform>().sizeDelta.x;
+        nextDamageSound = Time.time;
         UpdateUIHealth();
         UpdateUIShotgunAmmo();
     }
@@ -162,6 +173,7 @@ public class SceneManager : MonoBehaviour
             OnGameEnd();
             currentHealth = 0;
         }
+        PlayDamageSound();
         UpdateUIHealth();
     }
     
@@ -197,6 +209,11 @@ public class SceneManager : MonoBehaviour
             yield return new WaitForSeconds(0.05f);
             magma.transform.localScale -= new Vector3(magmaExpiryDecrement, 0, magmaExpiryDecrement);
         }
+        AudioSource s = magma.GetComponent<Magma>().source;
+        if(s != null) {
+            s.Stop();
+        }
+        
         Destroy(magma);
     }
     

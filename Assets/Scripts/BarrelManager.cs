@@ -27,6 +27,7 @@ public class BarrelManager : MonoBehaviour
     public float lineWidth = 0.1f;
     public int mobDamage = 5;
     public float playerDamage = 20.0f;
+    public AudioClip explosionSound;
     
     // Start is called before the first frame update
     void Start()
@@ -109,6 +110,7 @@ public class BarrelManager : MonoBehaviour
 
     IEnumerator Explode() {
         barrelsInRadius = GameObject.FindGameObjectsWithTag("Barrel");
+        SoundManager.Instance.Play(explosionSound, SceneManager.Instance.camera.transform);
         rend.material = invisible;
         explosion.GetComponent<ParticleSystem>().Play();
         foreach(GameObject barrel in barrelsInRadius)

@@ -2916,6 +2916,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 634771656}
+  - component: {fileID: 634771652}
   m_Layer: 0
   m_Name: ChickenModel
   m_TagString: Player
@@ -2923,6 +2924,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!65 &634771652
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 634771651}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5, y: 1.5, z: 1.5}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!4 &634771656
 Transform:
   m_ObjectHideFlags: 0
@@ -3217,7 +3231,7 @@ MonoBehaviour:
   lifetime: 0.075
   knockBack: 1
   fleeTime: 0.2
-  fireSound: {fileID: 0}
+  fireSound: {fileID: 8300000, guid: e38374d3b3e65154a83ea7a0690ced9c, type: 3}
 --- !u!1 &664703045
 GameObject:
   m_ObjectHideFlags: 0
@@ -7877,6 +7891,7 @@ GameObject:
   - component: {fileID: 1882007432}
   - component: {fileID: 1882007433}
   - component: {fileID: 1882007434}
+  - component: {fileID: 1882007435}
   m_Layer: 0
   m_Name: SceneManager
   m_TagString: Untagged
@@ -7966,6 +7981,18 @@ MonoBehaviour:
   enemies: []
   timeTillMoreEnemies: 10
   enemyCountIncrease: 5
+--- !u!114 &1882007435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1882007431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cab7a590c245cae429fbe4307215ce3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1967200050
 GameObject:
   m_ObjectHideFlags: 0
@@ -8732,7 +8759,7 @@ MonoBehaviour:
   height: 0.2
   lifetime: 5
   knockBack: 0
-  fireSound: {fileID: 0}
+  fireSound: {fileID: 8300000, guid: ce11e76ccf917694a94262ad7ffa90b3, type: 3}
 --- !u!1 &2123818525
 GameObject:
   m_ObjectHideFlags: 0

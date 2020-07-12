@@ -15,6 +15,7 @@ public class EnemyGun : MonoBehaviour
     public float lifetime = 5.0f;
     public float shotDelay = 0.5f;
     public Transform bulletParent;
+    public AudioClip fireSound;
 
 
     private float nextFire;
@@ -36,6 +37,7 @@ public class EnemyGun : MonoBehaviour
     public void Shoot()
     {
         SpawnBullet(distance, height, myTransform.rotation, bulletSpeed, lifetime);
+        SoundManager.Instance.Play(fireSound, SceneManager.Instance.camera.transform);
     }
 
     public GameObject SpawnBullet(float distance, float height, Quaternion rotation, float speed, float lifetime)

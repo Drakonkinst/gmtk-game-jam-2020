@@ -7,6 +7,7 @@ public class Magma : MonoBehaviour
     public float tickRate = 0.5f;
     public float damage = 1.0f;
     public float distance = 2.5f;
+    public AudioClip sizzleSound;
     
     private Transform myTransform;
     private float minX;
@@ -14,6 +15,9 @@ public class Magma : MonoBehaviour
     private float minZ;
     private float maxZ;
     private Transform playerTransform;
+    public AudioSource source;
+    private bool isSoundPlaying = false;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +47,15 @@ public class Magma : MonoBehaviour
             // check player
             if(IsWithin(playerTransform.position.x, playerTransform.position.z)) {
                 SceneManager.Instance.DamagePlayer(damage);
+                if(!isSoundPlaying) {
+                    isSoundPlaying = true;
+                    source = SoundManager.Instance.Play(sizzleSound, SceneManager.Instance.camera.transform);
+                }
+            } else {
+                if(isSoundPlaying && source != null) {
+                    source.Stop();
+                    isSoundPlaying = false;
+                }
             }
         }
     }

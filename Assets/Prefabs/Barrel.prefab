@@ -121,6 +121,7 @@ MonoBehaviour:
   lineWidth: 0.1
   mobDamage: 5
   playerDamage: 40
+  explosionSound: {fileID: 8300000, guid: 96095310d88394648b2574c15d43f341, type: 3}
 --- !u!65 &65547484668382220
 BoxCollider:
   m_ObjectHideFlags: 0
