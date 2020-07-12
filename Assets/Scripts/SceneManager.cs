@@ -26,7 +26,10 @@ public class SceneManager : MonoBehaviour
     public float magmaExpiryDecrement = 0.1f;
     public float magmaExpiryTime = 3.0f;
     public int maxSpawnAttempts = 10;
-    public float hazardSpawnDistance = 5.0f;
+    public float hazardSpawnDistanceMin = 5.0f;
+    public float hazardSpawnDistanceMax = 15.0f;
+    public float barrelGroupDistance = 10.0f;
+    public int numBarrelsInGroup = 3;
     
     public Vector2 worldCenter = new Vector2(0, 0);
     [System.NonSerialized]
@@ -64,11 +67,23 @@ public class SceneManager : MonoBehaviour
     }
     
     private void SpawnRandomMagma() {
-        Vector3 pos = GetPointAwayFromPlayer(hazardSpawnDistance, 0.01f, 10.0f);
+        Vector3 pos = GetPointAwayFromPlayer(hazardSpawnDistanceMin, 0.01f, hazardSpawnDistanceMax);
         GameObject magma = Instantiate(magmaHazard, hazardParent);
         magma.transform.position = pos;
         StartCoroutine(MagmaSpawn(magma));
         StartCoroutine(MagmaExpire(magma));
+    }
+    
+    private void SpawnBarrelBunch() {
+        Vector3 pos = GetPointAwayFromPlayer(hazardSpawnDistanceMin, 1.0f, hazardSpawnDistanceMax);
+        for(int i = 0; i < numBarrelsInGroup; i++) {
+            float angle = Random.Range(0.0f, Mathf.PI * 2.0f);
+            float distance = Random.Range(0.0f, barrelGroupDistance);
+            float xOffset = Mathf.Cos(angle) * distance;
+            float zOffset = Mathf.Sin(angle) * distance;
+            GameObject barrel = Instantiate(barrelHazard, hazardParent);
+            barrel.transform.position = pos + new Vector3(xOffset, 0, zOffset);
+        }
     }
     
     void Awake() {
@@ -93,6 +108,10 @@ public class SceneManager : MonoBehaviour
         SpawnRandomMagma();
         SpawnRandomMagma();
         SpawnRandomMagma();
+        SpawnBarrelBunch();
+        SpawnBarrelBunch();
+        SpawnBarrelBunch();
+        SpawnBarrelBunch();
     }
     
     public void DamagePlayer(float points) {
