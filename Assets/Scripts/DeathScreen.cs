@@ -18,4 +18,11 @@ public class DeathScreen : MonoBehaviour
         
         //TODO play death sound
     }
+    
+    void Update() {
+        if(Input.GetKeyDown(KeyCode.Space)) {
+            PlayerPrefs.SetInt("player_score", 0);
+            UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene");
+        }
+    }
 }
