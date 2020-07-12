@@ -9,11 +9,11 @@ public class EnemyGun : MonoBehaviour
     public Transform myTransform;
     public GameObject bulletPrefab;
     public float bulletSpeed = 10.0f;
-    public float inaccuracy = 5.0f;
+    public float inaccuracy = 10.0f;
     public float distance = 0.75f;
     public float height = 0.20f;
     public float lifetime = 5.0f;
-    public float shotDelay = 0.5f;
+    public float shotDelay = 1.0f;
     public Transform bulletParent;
     public AudioClip fireSound;
 

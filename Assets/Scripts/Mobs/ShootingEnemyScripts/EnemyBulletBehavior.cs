@@ -6,7 +6,7 @@ using UnityEngine;
 public class EnemyBulletBehavior : MonoBehaviour
 {
     private Transform myTransform;
-    public float damage = 1.0f;
+    public float damage = 0.1f;
     void Start()
     {
         myTransform = transform;

@@ -21,7 +21,7 @@ public class EnemyType2 : Steerable
     {
         player = SceneManager.Instance.playerTransform;
         childTransform = myTransform.Find("Model").Find("Handgun");
-        if(childTransform == null)
+        if (childTransform == null)
         {
             Debug.Log("Child Not Found.");
         }
@@ -31,7 +31,10 @@ public class EnemyType2 : Steerable
     public override void DoBehavior()
     {
         float distance = Vector3.Distance(myTransform.position, SceneManager.Instance.playerTransform.position);
-        //childTransform.rotation = transform.rotation;
+        Vector3 temp = myTransform.position;
+        temp.y = 1.0f;
+        myTransform.position = temp;
+        Debug.Log("Running!");
         if (distance <= minTrackingDistance && distance >= shootingDistance) // If the enemy is within the tracking and shooting distance
         {
             FollowPlayer(); // The enemy will follow

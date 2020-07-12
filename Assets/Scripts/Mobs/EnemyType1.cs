@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using UnityEngine;
 
 public class EnemyType1 : Steerable
@@ -10,16 +11,21 @@ public class EnemyType1 : Steerable
     public float attackCooldown = 2.0f;
     public float damage = 5.0f;
     private Transform player;
+    private Transform myTransform;
     private float nextAttack;
     
     public override void OnStart() {
         player = SceneManager.Instance.playerTransform;
         nextAttack = Time.time;
+        myTransform = transform;
     }
     
     public override void DoBehavior() {
         float distance = Vector3.Distance(myTransform.position, SceneManager.Instance.playerTransform.position);
-        if(distance <= minTrackingDistance) {
+        Vector3 temp = myTransform.position;
+        temp.y = 1.0f;
+        myTransform.position = temp;
+        if (distance <= minTrackingDistance) {
             FollowPlayer();
         } else {
             DoWanderBehavior();
