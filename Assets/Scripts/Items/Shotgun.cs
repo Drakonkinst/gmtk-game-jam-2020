@@ -29,7 +29,7 @@ public class Shotgun : Gun
         Vector3 fleeFrom = myTransform.forward + myTransform.position;
         playerMvt.Flee(fleeFrom, fleeTime);
         SceneManager.Instance.OnShotgunFire();
-        SoundManager.Instance.Play(fireSound, SceneManager.Instance.camera.transform);
+        SoundManager.Instance.Play(fireSound, SceneManager.Instance.camera.transform, 0.3f);
         return true;
         //Debug.Log("Fleeing from: " + fleeFrom);
     }

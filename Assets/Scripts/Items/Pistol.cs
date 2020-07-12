@@ -16,7 +16,7 @@ public class Pistol : Gun
     {
         // spawns bullet at object with random rotation
         SpawnBullet(distance, height, myTransform.rotation * Quaternion.Euler(0.0f, Random.Range(-inaccuracy,inaccuracy), 0.0f), bulletSpeed, lifetime, knockBack);
-        SoundManager.Instance.Play(fireSound, SceneManager.Instance.camera.transform);
+        SoundManager.Instance.Play(fireSound, SceneManager.Instance.camera.transform, 0.2f);
         return true;
     }
     

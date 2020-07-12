@@ -99,11 +99,15 @@ public class SceneManager : MonoBehaviour
     private IEnumerator AmmoReload() {
         while(true) {
             yield return new WaitForSeconds(reloadTime);
-            currentShotgunAmmo += numShellsOnReload;
-            if(currentShotgunAmmo > maxShotgunAmmo) {
-                currentShotgunAmmo = maxShotgunAmmo;
+            if(IsShotgunDisabled) {
+                IsShotgunDisabled = false;
+            } else {
+                currentShotgunAmmo += numShellsOnReload;
+                if(currentShotgunAmmo > maxShotgunAmmo) {
+                    currentShotgunAmmo = maxShotgunAmmo;
+                }
+                UpdateUIShotgunAmmo();
             }
-            UpdateUIShotgunAmmo();
         }
     }
     
@@ -210,6 +214,9 @@ public class SceneManager : MonoBehaviour
     public void OnShotgunFire() {
         currentShotgunAmmo--;
         UpdateUIShotgunAmmo();
+        if(currentShotgunAmmo == 0) {
+            IsShotgunDisabled = true;
+        }
     }
     
     private void OnGameEnd() {

@@ -110,7 +110,7 @@ public class BarrelManager : MonoBehaviour
 
     IEnumerator Explode() {
         barrelsInRadius = GameObject.FindGameObjectsWithTag("Barrel");
-        SoundManager.Instance.Play(explosionSound, SceneManager.Instance.camera.transform);
+        SoundManager.Instance.Play(explosionSound, SceneManager.Instance.camera.transform, 0.2f);
         rend.material = invisible;
         explosion.GetComponent<ParticleSystem>().Play();
         foreach(GameObject barrel in barrelsInRadius)

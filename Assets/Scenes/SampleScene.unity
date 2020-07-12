@@ -7025,7 +7025,7 @@ MonoBehaviour:
   cameraSpeedUp: 12
   playerSlowDown: 0.5
   playerHealthGain: 20
-  reloadTime: 3
+  reloadTime: 10
   numShellsOnReload: 1
   numEnemyBoost: 10
   damageSoundCooldown: 2
