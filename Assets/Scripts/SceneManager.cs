@@ -32,6 +32,13 @@ public class SceneManager : MonoBehaviour
     public int numBarrelsInGroup = 3;
     public int initialHazards = 10;
     public float shotgunDisableTime = 8.0f;
+    public float speedDuration = 4.0f;
+    public float playerSpeedUp = 10.0f;
+    public float cameraSpeedUp = 12.0f;
+    public float playerSlowDown = 1.0f;
+    public float playerHealthGain = 20.0f;
+    public int numShellsOnReload = 5;
+    public int numEnemyBoost = 10;
     
     public Vector2 worldCenter = new Vector2(0, 0);
     [System.NonSerialized]
@@ -48,11 +55,44 @@ public class SceneManager : MonoBehaviour
     private float healthBarWidth;
     private int score = 0;
     
-    private IEnumerator TrackScore() {
-        while(true) {
-            yield return new WaitForSeconds(1.0f);
-            score++;
+    public void SpawnEnemies() {
+        if(EnemySpawnManager.Instance == null) {
+            return;
         }
+        for(int i = 0; i < numEnemyBoost; i++) {
+            EnemySpawnManager.Instance.SpawnRandomEnemy();
+        }
+    }
+    public void AmmoReload() {
+        currentShotgunAmmo += numShellsOnReload;
+        if(currentShotgunAmmo > maxShotgunAmmo) {
+            currentShotgunAmmo = maxShotgunAmmo;
+        }
+        UpdateUIShotgunAmmo();
+    }
+    
+    public void HealthGain() {
+        currentHealth += playerHealthGain;
+        if(currentHealth > maxHealth) {
+            currentHealth = maxHealth;
+        }
+        UpdateUIHealth();
+    }
+    
+    public void SpeedUpPlayer() {
+        float playerSpeed = player.GetComponent<SteeringManager>().maxVelocity;
+        float cameraSpeed = camera.GetComponent<SteeringManager>().maxVelocity;
+        player.GetComponent<SteeringManager>().maxVelocity = playerSpeedUp;
+        camera.GetComponent<SteeringManager>().maxVelocity = cameraSpeedUp;
+        StartCoroutine(RestoreOriginalSpeed(playerSpeed, cameraSpeed));
+    }
+    
+    public void SlowDownPlayer() {
+        float playerSpeed = player.GetComponent<SteeringManager>().maxVelocity;
+        float cameraSpeed = camera.GetComponent<SteeringManager>().maxVelocity;
+        player.GetComponent<SteeringManager>().maxVelocity = playerSlowDown;
+        //camera.GetComponent<SteeringManager>().maxVelocity = cameraSpeedUp;
+        StartCoroutine(RestoreOriginalSpeed(playerSpeed, cameraSpeed));
     }
     
     public void DisableShotgun() {
@@ -61,34 +101,6 @@ public class SceneManager : MonoBehaviour
         }
         IsShotgunDisabled = true;
         StartCoroutine(EnableShotgun());
-    }
-    
-    private IEnumerator EnableShotgun() {
-        yield return new WaitForSeconds(shotgunDisableTime);
-        IsShotgunDisabled = false;
-    }
-    
-    public Vector2 GetRandomWorldPoint() {
-        float x = Random.Range(worldCenter.x - worldWidth / 2, worldCenter.x + worldWidth / 2);
-        float y = Random.Range(worldCenter.y - worldLength / 2, worldCenter.y + worldLength / 2);
-        return new Vector2(x, y);
-    }
-    
-    public Vector3 GetPointAwayFromPlayer(float distance, float height, float maxDistance = Mathf.Infinity) {
-        Vector3 spawnPoint;
-        int numAttempts = 0;
-        float d;
-        do {
-            Vector2 randomPt = SceneManager.Instance.GetRandomWorldPoint();
-            spawnPoint = new Vector3(randomPt.x, height, randomPt.y);
-            d = Vector3.Distance(spawnPoint, playerTransform.position);
-            numAttempts++;
-        } while(numAttempts < maxSpawnAttempts && d < distance && d < maxDistance);
-        if(numAttempts == maxSpawnAttempts) {
-            Debug.Log("Failed to spawn!");
-            return Vector3.zero;
-        }
-        return spawnPoint;
     }
     
     public void SpawnRandomHazard() {
@@ -142,7 +154,6 @@ public class SceneManager : MonoBehaviour
             SpawnRandomHazard();
         }
         StartCoroutine(TrackScore());
-        DisableShotgun();
     }
     
     public void DamagePlayer(float points) {
@@ -159,7 +170,7 @@ public class SceneManager : MonoBehaviour
         UpdateUIShotgunAmmo();
     }
     
-    public void OnGameEnd() {
+    private void OnGameEnd() {
         UnityEngine.SceneManagement.SceneManager.LoadScene("DeathScreen");
         PlayerPrefs.SetInt("player_score", score);
     }
@@ -179,6 +190,7 @@ public class SceneManager : MonoBehaviour
             magma.transform.localScale += new Vector3(magmaExpiryDecrement, 0, magmaExpiryDecrement);
         }
     }
+    
     private IEnumerator MagmaExpire(GameObject magma) {
         yield return new WaitForSeconds(magmaExpiryTime);
         while(magma.transform.localScale.x > 0) {
@@ -187,10 +199,45 @@ public class SceneManager : MonoBehaviour
         }
         Destroy(magma);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+    
+    private IEnumerator TrackScore() {
+        while(true) {
+            yield return new WaitForSeconds(1.0f);
+            score++;
+        }
+    }
+    
+    private IEnumerator EnableShotgun() {
+        yield return new WaitForSeconds(shotgunDisableTime);
+        IsShotgunDisabled = false;
+    }
+    
+    public Vector2 GetRandomWorldPoint() {
+        float x = Random.Range(worldCenter.x - worldWidth / 2, worldCenter.x + worldWidth / 2);
+        float y = Random.Range(worldCenter.y - worldLength / 2, worldCenter.y + worldLength / 2);
+        return new Vector2(x, y);
+    }
+    
+    public Vector3 GetPointAwayFromPlayer(float distance, float height, float maxDistance = Mathf.Infinity) {
+        Vector3 spawnPoint;
+        int numAttempts = 0;
+        float d;
+        do {
+            Vector2 randomPt = SceneManager.Instance.GetRandomWorldPoint();
+            spawnPoint = new Vector3(randomPt.x, height, randomPt.y);
+            d = Vector3.Distance(spawnPoint, playerTransform.position);
+            numAttempts++;
+        } while(numAttempts < maxSpawnAttempts && d < distance && d < maxDistance);
+        if(numAttempts == maxSpawnAttempts) {
+            Debug.Log("Failed to spawn!");
+            return Vector3.zero;
+        }
+        return spawnPoint;
+    }
+    
+    private IEnumerator RestoreOriginalSpeed(float speed, float cameraSpeed) {
+        yield return new WaitForSeconds(speedDuration);
+        player.GetComponent<SteeringManager>().maxVelocity = speed;
+        camera.GetComponent<SteeringManager>().maxVelocity = cameraSpeed;
     }
 }

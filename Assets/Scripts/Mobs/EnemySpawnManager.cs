@@ -6,12 +6,14 @@ public class EnemySpawnManager : MonoBehaviour
 {
     public static EnemySpawnManager Instance;
     public Transform enemyParent;
-    public float spawnInterval = 3.0f;
+    public float spawnInterval = 2.0f;
     public float minSpawnDistance = 5.0f;
     public GameObject enemyType1;
     public GameObject enemyType2;
     public int maxEnemies = 10;
     public List<GameObject> enemies = new List<GameObject>();
+    public float timeTillMoreEnemies = 10.0f;
+    public int enemyCountIncrease = 5;
     
     private int numEnemies;
     private Transform player;
@@ -21,6 +23,14 @@ public class EnemySpawnManager : MonoBehaviour
         numEnemies = 0;
         player = SceneManager.Instance.playerTransform;
         StartCoroutine(SpawnEnemies());
+        StartCoroutine(SpawnMoreEnemies());
+    }
+    
+    private IEnumerator SpawnMoreEnemies() {
+        while(true) {
+            yield return new WaitForSeconds(timeTillMoreEnemies);
+            maxEnemies += enemyCountIncrease;
+        }
     }
     
     private IEnumerator SpawnEnemies() {
@@ -32,7 +42,7 @@ public class EnemySpawnManager : MonoBehaviour
         }
     }
     
-    private void SpawnRandomEnemy() {
+    public void SpawnRandomEnemy() {
         Vector3 spawnPos = FindRandomEnemySpawn();
         if(spawnPos == Vector3.zero) {
             return;

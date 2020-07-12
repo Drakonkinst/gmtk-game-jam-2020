@@ -7571,6 +7571,13 @@ MonoBehaviour:
   numBarrelsInGroup: 3
   initialHazards: 10
   shotgunDisableTime: 8
+  speedDuration: 4
+  playerSpeedUp: 10
+  cameraSpeedUp: 12
+  playerSlowDown: 0.5
+  playerHealthGain: 20
+  numShellsOnReload: 5
+  numEnemyBoost: 10
   worldCenter: {x: 0, y: 0}
 --- !u!114 &1882007434
 MonoBehaviour:
@@ -7585,13 +7592,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyParent: {fileID: 1656362889}
-  spawnInterval: 3
+  spawnInterval: 2
   minSpawnDistance: 5
   enemyType1: {fileID: 1559310561354305718, guid: 15ae8fa26da8ce140b38e187127b7fc1,
     type: 3}
   enemyType2: {fileID: 0}
   maxEnemies: 10
   enemies: []
+  timeTillMoreEnemies: 10
+  enemyCountIncrease: 5
 --- !u!1 &1967200050
 GameObject:
   m_ObjectHideFlags: 0
