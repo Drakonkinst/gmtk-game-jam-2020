@@ -104,8 +104,7 @@ public class SceneManager : MonoBehaviour
     private IEnumerator AmmoReload() {
         while(true) {
             yield return new WaitForSeconds(reloadTime);
-            currentHealth += playerHealthGain;
-            UpdateUIHealth();
+            HealthGain();
             if(IsShotgunDisabled) {
                 IsShotgunDisabled = false;
             } else {
