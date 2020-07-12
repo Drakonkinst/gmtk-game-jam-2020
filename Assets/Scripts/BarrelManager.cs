@@ -46,7 +46,6 @@ public class BarrelManager : MonoBehaviour
     void OnTriggerEnter(Collider col) {
         if(col.gameObject.tag == "Bullet") { // Barrel takes damage when struck by bullet
             health--;
-            Debug.Log("Barrel Health: " + health);
             CheckStatus();
         }
     }
@@ -112,11 +111,9 @@ public class BarrelManager : MonoBehaviour
         barrelsInRadius = GameObject.FindGameObjectsWithTag("Barrel");
         rend.material = invisible;
         explosion.GetComponent<ParticleSystem>().Play();
-        Debug.Log("Barrels within range: " + barrelsInRadius);
         foreach(GameObject barrel in barrelsInRadius)
         {
             float distance = Vector3.Distance(myTransform.position, barrel.transform.position);
-            Debug.Log("Distance: " + distance);
             if (barrel != this && (distance <= explosionRadius))
             {
                 BarrelManager bm = barrel.GetComponent<BarrelManager>();
