@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   modelName: Model
-  minTrackingDistance: 2
+  minTrackingDistance: 10
   shootingDistance: 5
   slowingDistance: 1
   contactDistance: 1
@@ -212,7 +212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireRate: 0.5
-  myTransform: {fileID: 0}
+  myTransform: {fileID: 8287101441620462250}
   bulletPrefab: {fileID: 2162433631264805878, guid: 0a80b4059b8f24a4ea70656b728d80b7,
     type: 3}
   bulletSpeed: 10

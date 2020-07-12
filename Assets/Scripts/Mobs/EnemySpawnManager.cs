@@ -48,7 +48,12 @@ public class EnemySpawnManager : MonoBehaviour
             return;
         }
         GameObject enemyToSpawn = enemyType1;
-        
+        int choice = Random.Range(0, 2);
+        if(choice == 0) {
+            enemyToSpawn = enemyType1;
+        } else if(choice == 1) {
+            enemyToSpawn = enemyType2;
+        }
         GameObject enemySpawned = Instantiate(enemyToSpawn, enemyParent);
         enemies.Add(enemySpawned);
         CleanList();
