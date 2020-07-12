@@ -2636,7 +2636,7 @@ MonoBehaviour:
   host: {fileID: 644097632}
   facing: 0
   maxForce: 10
-  maxVelocity: 2
+  maxVelocity: 3.25
   wanderCircleDistance: 1
   wanderCircleRadius: 3
   maxAngleChangeDeg: 5
@@ -7121,7 +7121,7 @@ MonoBehaviour:
   speedDuration: 4
   playerSpeedUp: 10
   cameraSpeedUp: 12
-  playerSlowDown: 0.5
+  playerSlowDown: 1
   playerHealthGain: 5
   reloadTime: 10
   numShellsOnReload: 1
