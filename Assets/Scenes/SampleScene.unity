@@ -7131,6 +7131,7 @@ MonoBehaviour:
   speedUpSound: {fileID: 8300000, guid: 1d6dd4bcfc0946c458c19af76a98c3df, type: 3}
   slowDownSound: {fileID: 8300000, guid: d260d00b4fe846d4fa1d12489d5797ee, type: 3}
   eventInterval: 4
+  spawnMargin: 7.5
   worldCenter: {x: 0, y: 0}
 --- !u!114 &1882007434
 MonoBehaviour:

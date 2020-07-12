@@ -45,6 +45,7 @@ public class SceneManager : MonoBehaviour
     public AudioClip speedUpSound;
     public AudioClip slowDownSound;
     public float eventInterval = 4.0f;
+    public float spawnMargin = 5.0f;
     
     public Vector2 worldCenter = new Vector2(0, 0);
     [System.NonSerialized]
@@ -275,8 +276,8 @@ public class SceneManager : MonoBehaviour
     }
     
     public Vector2 GetRandomWorldPoint() {
-        float x = Random.Range(worldCenter.x - worldWidth / 2, worldCenter.x + worldWidth / 2);
-        float y = Random.Range(worldCenter.y - worldLength / 2, worldCenter.y + worldLength / 2);
+        float x = Random.Range(worldCenter.x - worldWidth / 2 + spawnMargin, worldCenter.x + worldWidth / 2 - spawnMargin);
+        float y = Random.Range(worldCenter.y - worldLength / 2 + spawnMargin, worldCenter.y + worldLength / 2 - spawnMargin);
         return new Vector2(x, y);
     }
     
