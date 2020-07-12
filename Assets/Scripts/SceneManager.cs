@@ -206,6 +206,7 @@ public class SceneManager : MonoBehaviour
         StartCoroutine(TrackScore());
         StartCoroutine(AmmoReload());
         StartCoroutine(RandomEvent());
+        //UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
     }
     
     public void DamagePlayer(float points) {
