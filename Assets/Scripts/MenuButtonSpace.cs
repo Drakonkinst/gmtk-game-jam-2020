@@ -5,16 +5,13 @@ using UnityEngine;
 
 public class MenuButtonSpace : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) {
+        //Debug.Log("Reached update");
+        if(Input.GetKeyDown(KeyCode.Space)) {
+            //Debug.Log("Transitioning to TitleScene");
             UnityEngine.SceneManagement.SceneManager.LoadScene("TitleScene");
         }
     }
