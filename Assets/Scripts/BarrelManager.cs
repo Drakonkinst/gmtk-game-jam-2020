@@ -9,6 +9,8 @@ public class BarrelManager : MonoBehaviour
     public int healthMax = 4;
     public int health;
     public float timeToBlink = 0.5f;
+    public float explosionDuration = 3.0f;
+    public float explosionRadius = 10.0f;
     private bool damaged = false;
     private bool started = false;
     private Renderer rend;
@@ -18,17 +20,27 @@ public class BarrelManager : MonoBehaviour
     public Material invisible;
     public GameObject child;
     private ParticleSystem explosion;
-    private float explosionDuration = 3.0f;
-    private float explosionRadius = 50.0f;
     private GameObject[] barrelsInRadius;
+    private Transform myTransform;
+    private LineRenderer line;
+    public int circleSegments = 50;
+    public float lineWidth = 0.1f;
+    public int mobDamage = 5;
+    public float playerDamage = 20.0f;
     
     // Start is called before the first frame update
     void Start()
     {
+        myTransform = transform;
         rend = GetComponent<Renderer>();
         rend.material.mainTexture = barrelTexture;
         health = healthMax;
-        explosion = Instantiate(child, this.transform).GetComponent<ParticleSystem>();
+        explosion = Instantiate(child, myTransform).GetComponent<ParticleSystem>();
+        line = GetComponent<LineRenderer>();
+        line.SetVertexCount(circleSegments + 1);
+        line.useWorldSpace = false;
+        line.SetWidth(lineWidth, lineWidth);
+        CreatePoints();
     }
     
     void OnTriggerEnter(Collider col) {
@@ -36,6 +48,25 @@ public class BarrelManager : MonoBehaviour
             health--;
             Debug.Log("Barrel Health: " + health);
             CheckStatus();
+        }
+    }
+    
+    private void CreatePoints ()
+    {
+        float x;
+        float y;
+        float z;
+
+        float angle = 20f;
+
+        for (int i = 0; i < (circleSegments + 1); i++)
+        {
+            x = Mathf.Sin(Mathf.Deg2Rad * angle) * explosionRadius;
+            y = Mathf.Cos(Mathf.Deg2Rad * angle) * explosionRadius;
+
+            line.SetPosition(i,new Vector3(x,-1,y) );
+
+            angle += (360f / circleSegments);
         }
     }
 
@@ -62,20 +93,17 @@ public class BarrelManager : MonoBehaviour
 
     IEnumerator BlinkRed() {
         started = true;
-        Debug.Log("Entered Coroutine.");
         while((timeToBlink -= 0.1f) >= 0f) {
             yield return new WaitForSeconds(timeToBlink);
-            damaged = !damaged;
             if(damaged) {
                 rend.material = defaultState;
                 rend.material.mainTexture = barrelTexture;
-                Debug.Log("Changed to Magma.");
             }
             else {
                 rend.material = damagedState;
                 rend.material.mainTexture = barrelTexture;
-                Debug.Log("Changed to Wooden.");
             }
+            damaged = !damaged;
         }
         StartCoroutine("Explode");
     }
@@ -87,7 +115,7 @@ public class BarrelManager : MonoBehaviour
         Debug.Log("Barrels within range: " + barrelsInRadius);
         foreach(GameObject barrel in barrelsInRadius)
         {
-            float distance = Vector3.Distance(this.transform.position, barrel.transform.position);
+            float distance = Vector3.Distance(myTransform.position, barrel.transform.position);
             Debug.Log("Distance: " + distance);
             if (barrel != this && (distance <= explosionRadius))
             {
@@ -100,6 +128,18 @@ public class BarrelManager : MonoBehaviour
                 }
                 
             }
+        }
+        foreach(GameObject enemy in EnemySpawnManager.Instance.enemies) {
+            if(enemy == null) {
+                continue;
+            }
+            if(Vector3.Distance(myTransform.position, enemy.transform.position) <= explosionRadius) {
+                enemy.GetComponent<Breakable>().Damage(mobDamage);
+            }
+        }
+        if(Vector3.Distance(myTransform.position, SceneManager.Instance.playerTransform.position) <= explosionRadius) {
+            Debug.Log("Explosion hit player!");
+            SceneManager.Instance.DamagePlayer(playerDamage);
         }
         yield return new WaitForSeconds(explosionDuration);
         Destroy(gameObject);
