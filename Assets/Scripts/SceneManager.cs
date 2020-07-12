@@ -10,7 +10,7 @@ public class SceneManager : MonoBehaviour
     public GameObject player;
     public GameObject ground;
     public GameObject gunPlane;
-    public GameObject camera;
+    public new GameObject camera;
     public GameObject healthBar;
     public GameObject ammoCount;
     public Transform bulletParent;
