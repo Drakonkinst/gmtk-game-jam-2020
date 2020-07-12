@@ -28,7 +28,6 @@ public class EnemyType1 : Steerable
         if(Vector3.Distance(player.position, myTransform.position) <= contactDistance) {
             float currTime = Time.time;
             if(currTime > nextAttack) {
-                Debug.Log("Attack!");
                 SceneManager.Instance.DamagePlayer(damage);
                 nextAttack = currTime + attackCooldown;
             }

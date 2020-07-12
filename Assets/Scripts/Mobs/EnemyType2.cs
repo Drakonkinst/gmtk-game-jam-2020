@@ -51,7 +51,8 @@ public class EnemyType2 : Steerable
             StopCoroutine("ShootPlayer"); // It will stop shooting
             DoWanderBehavior(); // And Wander until the enemy re-enters the previous range
         }
-        if (Vector3.Distance(player.position, myTransform.position) <= contactDistance)
+        
+        if(Vector3.Distance(player.position, myTransform.position) <= contactDistance)
         {
             float currTime = Time.time;
             if (currTime > nextAttack)
