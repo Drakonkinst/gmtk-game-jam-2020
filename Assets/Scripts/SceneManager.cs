@@ -36,12 +36,14 @@ public class SceneManager : MonoBehaviour
     public float playerSpeedUp = 10.0f;
     public float cameraSpeedUp = 12.0f;
     public float playerSlowDown = 1.0f;
-    public float playerHealthGain = 20.0f;
+    public float playerHealthGain = 5.0f;
     public float reloadTime = 3.0f;
     public int numShellsOnReload = 1;
     public int numEnemyBoost = 10;
     public float damageSoundCooldown = 2.0f;
     public AudioClip damageSound;
+    public AudioClip speedUpSound;
+    public AudioClip slowDownSound;
     public float eventInterval = 4.0f;
     
     public Vector2 worldCenter = new Vector2(0, 0);
@@ -73,7 +75,7 @@ public class SceneManager : MonoBehaviour
             yield return new WaitForSeconds(eventInterval);
             int choice = Random.Range(0, 6);
             if(choice == 0) {
-                HealthGain();
+                SpawnRandomMagma();
             } else if(choice == 1) {
                 SpawnRandomMagma();
             } else if(choice == 2) {
@@ -81,9 +83,11 @@ public class SceneManager : MonoBehaviour
             } else if(choice == 3) {
                 SpawnEnemies();
             } else if(choice == 4) {
+                SoundManager.Instance.Play(speedUpSound, camera.transform, 0.5f);
                 SpeedUpPlayer();
             } else if(choice == 5) {
                 SlowDownPlayer();
+                SoundManager.Instance.Play(slowDownSound, camera.transform, 0.5f);
             }
         }
     }
@@ -99,6 +103,8 @@ public class SceneManager : MonoBehaviour
     private IEnumerator AmmoReload() {
         while(true) {
             yield return new WaitForSeconds(reloadTime);
+            currentHealth += playerHealthGain;
+            UpdateUIHealth();
             if(IsShotgunDisabled) {
                 IsShotgunDisabled = false;
             } else {
@@ -199,6 +205,7 @@ public class SceneManager : MonoBehaviour
         }
         StartCoroutine(TrackScore());
         StartCoroutine(AmmoReload());
+        StartCoroutine(RandomEvent());
     }
     
     public void DamagePlayer(float points) {

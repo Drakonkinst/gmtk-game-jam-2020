@@ -7109,7 +7109,7 @@ MonoBehaviour:
   maxShotgunAmmo: 6
   currentShotgunAmmo: 6
   magmaExpiryDecrement: 0.1
-  magmaExpiryTime: 12
+  magmaExpiryTime: 24
   maxSpawnAttempts: 10
   hazardSpawnDistanceMin: 5
   hazardSpawnDistanceMax: 15
@@ -7121,12 +7121,14 @@ MonoBehaviour:
   playerSpeedUp: 10
   cameraSpeedUp: 12
   playerSlowDown: 0.5
-  playerHealthGain: 20
+  playerHealthGain: 5
   reloadTime: 10
   numShellsOnReload: 1
   numEnemyBoost: 10
   damageSoundCooldown: 2
   damageSound: {fileID: 8300000, guid: 0cc334ed4527342418aba7149d50451c, type: 3}
+  speedUpSound: {fileID: 8300000, guid: 1d6dd4bcfc0946c458c19af76a98c3df, type: 3}
+  slowDownSound: {fileID: 8300000, guid: d260d00b4fe846d4fa1d12489d5797ee, type: 3}
   eventInterval: 4
   worldCenter: {x: 0, y: 0}
 --- !u!114 &1882007434
