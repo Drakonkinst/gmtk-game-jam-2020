@@ -31,6 +31,7 @@ public class SceneManager : MonoBehaviour
     public float barrelGroupDistance = 10.0f;
     public int numBarrelsInGroup = 3;
     public int initialHazards = 10;
+    public float shotgunDisableTime = 8.0f;
     
     public Vector2 worldCenter = new Vector2(0, 0);
     [System.NonSerialized]
@@ -41,6 +42,8 @@ public class SceneManager : MonoBehaviour
     public float worldWidth;
     [System.NonSerialized]
     public float worldLength;
+    [System.NonSerialized]
+    public bool IsShotgunDisabled = false;
     
     private float healthBarWidth;
     private int score = 0;
@@ -50,6 +53,19 @@ public class SceneManager : MonoBehaviour
             yield return new WaitForSeconds(1.0f);
             score++;
         }
+    }
+    
+    public void DisableShotgun() {
+        if(IsShotgunDisabled) {
+            return;
+        }
+        IsShotgunDisabled = true;
+        StartCoroutine(EnableShotgun());
+    }
+    
+    private IEnumerator EnableShotgun() {
+        yield return new WaitForSeconds(shotgunDisableTime);
+        IsShotgunDisabled = false;
     }
     
     public Vector2 GetRandomWorldPoint() {
@@ -75,7 +91,7 @@ public class SceneManager : MonoBehaviour
         return spawnPoint;
     }
     
-    private void SpawnRandomHazard() {
+    public void SpawnRandomHazard() {
         int hazard = Random.Range(0, 2);
         if(hazard == 0) {
             SpawnRandomMagma();
@@ -84,7 +100,7 @@ public class SceneManager : MonoBehaviour
         }
     }
     
-    private void SpawnRandomMagma() {
+    public void SpawnRandomMagma() {
         Vector3 pos = GetPointAwayFromPlayer(hazardSpawnDistanceMin, 0.01f, hazardSpawnDistanceMax);
         GameObject magma = Instantiate(magmaHazard, hazardParent);
         magma.transform.position = pos;
@@ -92,7 +108,7 @@ public class SceneManager : MonoBehaviour
         StartCoroutine(MagmaExpire(magma));
     }
     
-    private void SpawnBarrelBunch() {
+    public void SpawnBarrelBunch() {
         Vector3 pos = GetPointAwayFromPlayer(hazardSpawnDistanceMin, 1.0f, hazardSpawnDistanceMax);
         for(int i = 0; i < numBarrelsInGroup; i++) {
             float angle = Random.Range(0.0f, Mathf.PI * 2.0f);
@@ -126,6 +142,7 @@ public class SceneManager : MonoBehaviour
             SpawnRandomHazard();
         }
         StartCoroutine(TrackScore());
+        DisableShotgun();
     }
     
     public void DamagePlayer(float points) {

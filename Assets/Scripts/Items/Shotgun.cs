@@ -14,7 +14,7 @@ public class Shotgun : Gun
     public float fleeTime = 0.2f;
 
     public override bool Fire() {
-        if(SceneManager.Instance.currentShotgunAmmo <= 0) {
+        if(SceneManager.Instance.IsShotgunDisabled || SceneManager.Instance.currentShotgunAmmo <= 0) {
             return false;
         }
         Quaternion leftMost = myTransform.rotation * Quaternion.Euler(0f, -inaccuracy, 0f); 
