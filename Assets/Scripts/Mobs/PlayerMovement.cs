@@ -27,4 +27,8 @@ public class PlayerMovement : Steerable
         steering.SetWanderAngleToFacing();
         isFleeing = false;
     }
+    
+    void OnTriggerStay(Collider other) {
+        Debug.Log("Hit! " + other.tag);
+    }
 }
