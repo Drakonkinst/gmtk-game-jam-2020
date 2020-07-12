@@ -154,5 +154,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tickRate: 0.5
-  damage: 1
+  damage: 2
   distance: 2.5

@@ -24,7 +24,7 @@ public class SceneManager : MonoBehaviour
     public int maxShotgunAmmo = 20;
     public int currentShotgunAmmo = 10;
     public float magmaExpiryDecrement = 0.1f;
-    public float magmaExpiryTime = 3.0f;
+    public float magmaExpiryTime = 12.0f;
     public int maxSpawnAttempts = 10;
     public float hazardSpawnDistanceMin = 5.0f;
     public float hazardSpawnDistanceMax = 15.0f;
@@ -43,6 +43,14 @@ public class SceneManager : MonoBehaviour
     public float worldLength;
     
     private float healthBarWidth;
+    private int score = 0;
+    
+    private IEnumerator TrackScore() {
+        while(true) {
+            yield return new WaitForSeconds(1.0f);
+            score++;
+        }
+    }
     
     public Vector2 GetRandomWorldPoint() {
         float x = Random.Range(worldCenter.x - worldWidth / 2, worldCenter.x + worldWidth / 2);
@@ -117,11 +125,13 @@ public class SceneManager : MonoBehaviour
         for(int i = 0; i < initialHazards; i++) {
             SpawnRandomHazard();
         }
+        StartCoroutine(TrackScore());
     }
     
     public void DamagePlayer(float points) {
         currentHealth -= points;
         if(currentHealth < 0) {
+            OnGameEnd();
             currentHealth = 0;
         }
         UpdateUIHealth();
@@ -133,7 +143,8 @@ public class SceneManager : MonoBehaviour
     }
     
     public void OnGameEnd() {
-        //player.GetComponent<SteeringManager>().maxVelocity = 0;
+        UnityEngine.SceneManagement.SceneManager.LoadScene("DeathScreen");
+        PlayerPrefs.SetInt("player_score", score);
     }
     
     private void UpdateUIHealth() {

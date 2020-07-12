@@ -120,7 +120,7 @@ MonoBehaviour:
   circleSegments: 50
   lineWidth: 0.1
   mobDamage: 5
-  playerDamage: 20
+  playerDamage: 40
 --- !u!65 &65547484668382220
 BoxCollider:
   m_ObjectHideFlags: 0

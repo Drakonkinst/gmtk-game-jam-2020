@@ -210,7 +210,7 @@ MonoBehaviour:
   wanderCircleDistance: 1
   wanderCircleRadius: 3
   maxAngleChangeDeg: 15
-  sightDistance: 0.5
+  sightDistance: 1
   sightAngleDeg: 30
   ignoreWalls: 0
 --- !u!114 &1559310561354305709
@@ -230,7 +230,7 @@ MonoBehaviour:
   slowingDistance: 1
   contactDistance: 2
   attackCooldown: 2
-  damage: 2.5
+  damage: 5
 --- !u!114 &114814853019900346
 MonoBehaviour:
   m_ObjectHideFlags: 0
