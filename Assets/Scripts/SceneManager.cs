@@ -10,7 +10,11 @@ public class SceneManager : MonoBehaviour
     public GameObject ground;
     public GameObject gunPlane;
     public GameObject camera;
+    public GameObject healthBar;
     public Transform bulletParent;
+    
+    public float maxHealth = 100.0f;
+    public float currentHealth = 50.0f;
     
     public Vector2 worldCenter = new Vector2(0, 0);
     [System.NonSerialized]
@@ -21,6 +25,8 @@ public class SceneManager : MonoBehaviour
     public float worldWidth;
     [System.NonSerialized]
     public float worldLength;
+    
+    private float healthBarWidth;
     
     public Vector2 GetRandomWorldPoint() {
         float x = Random.Range(worldCenter.x - worldWidth / 2, worldCenter.x + worldWidth / 2);
@@ -40,6 +46,17 @@ public class SceneManager : MonoBehaviour
         worldWidth = size.x;
         worldLength = size.z;
         Debug.Log(worldWidth + " x " + worldLength);
+        healthBarWidth = healthBar.GetComponent<RectTransform>().sizeDelta.x;
+        Debug.Log("HEALTHBAR: " + healthBarWidth);
+        UpdateUIHealth();
+    }
+    
+    public void DamagePlayer(float points) {
+        UpdateUIHealth();
+    }
+    
+    private void UpdateUIHealth() {
+        healthBar.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, healthBarWidth * (currentHealth / maxHealth));
     }
 
     // Update is called once per frame
