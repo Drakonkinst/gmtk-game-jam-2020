@@ -6,6 +6,7 @@ using TMPro;
 public class DeathScreen : MonoBehaviour
 {
     public GameObject scoreText;
+    public AudioClip deathSound;
     
     private void UpdateScore(int value) {
         scoreText.GetComponent<TextMeshProUGUI>().SetText("Score: " + value);
@@ -16,7 +17,7 @@ public class DeathScreen : MonoBehaviour
         int score = PlayerPrefs.GetInt("player_score");
         UpdateScore(score);
         
-        //TODO play death sound
+        SoundManager.Instance.Play(deathSound, Camera.main.transform);
     }
     
     void Update() {

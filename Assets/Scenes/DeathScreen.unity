@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 56587883}
   - component: {fileID: 56587882}
   - component: {fileID: 56587885}
+  - component: {fileID: 56587886}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -208,6 +209,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 1680841585}
+  deathSound: {fileID: 8300000, guid: 11840de0417ad8941a510241e4ca1ab4, type: 3}
+--- !u!114 &56587886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 56587881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cab7a590c245cae429fbe4307215ce3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &366606892
 GameObject:
   m_ObjectHideFlags: 0

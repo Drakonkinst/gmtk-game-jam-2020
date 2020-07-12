@@ -21,8 +21,8 @@ public class SceneManager : MonoBehaviour
     
     public float maxHealth = 100.0f;
     public float currentHealth = 50.0f;
-    public int maxShotgunAmmo = 20;
-    public int currentShotgunAmmo = 10;
+    public int maxShotgunAmmo = 6;
+    public int currentShotgunAmmo = 6;
     public float magmaExpiryDecrement = 0.1f;
     public float magmaExpiryTime = 12.0f;
     public int maxSpawnAttempts = 10;
@@ -37,10 +37,12 @@ public class SceneManager : MonoBehaviour
     public float cameraSpeedUp = 12.0f;
     public float playerSlowDown = 1.0f;
     public float playerHealthGain = 20.0f;
-    public int numShellsOnReload = 5;
+    public float reloadTime = 3.0f;
+    public int numShellsOnReload = 1;
     public int numEnemyBoost = 10;
     public float damageSoundCooldown = 2.0f;
     public AudioClip damageSound;
+    public float eventInterval = 4.0f;
     
     public Vector2 worldCenter = new Vector2(0, 0);
     [System.NonSerialized]
@@ -65,6 +67,26 @@ public class SceneManager : MonoBehaviour
             nextDamageSound = currTime + damageSoundCooldown;
         }
     }
+    
+    private IEnumerator RandomEvent() {
+        while(true) {
+            yield return new WaitForSeconds(eventInterval);
+            int choice = Random.Range(0, 6);
+            if(choice == 0) {
+                HealthGain();
+            } else if(choice == 1) {
+                SpawnRandomMagma();
+            } else if(choice == 2) {
+                SpawnBarrelBunch();
+            } else if(choice == 3) {
+                SpawnEnemies();
+            } else if(choice == 4) {
+                SpeedUpPlayer();
+            } else if(choice == 5) {
+                SlowDownPlayer();
+            }
+        }
+    }
     public void SpawnEnemies() {
         if(EnemySpawnManager.Instance == null) {
             return;
@@ -73,12 +95,16 @@ public class SceneManager : MonoBehaviour
             EnemySpawnManager.Instance.SpawnRandomEnemy();
         }
     }
-    public void AmmoReload() {
-        currentShotgunAmmo += numShellsOnReload;
-        if(currentShotgunAmmo > maxShotgunAmmo) {
-            currentShotgunAmmo = maxShotgunAmmo;
+    
+    private IEnumerator AmmoReload() {
+        while(true) {
+            yield return new WaitForSeconds(reloadTime);
+            currentShotgunAmmo += numShellsOnReload;
+            if(currentShotgunAmmo > maxShotgunAmmo) {
+                currentShotgunAmmo = maxShotgunAmmo;
+            }
+            UpdateUIShotgunAmmo();
         }
-        UpdateUIShotgunAmmo();
     }
     
     public void HealthGain() {
@@ -165,6 +191,7 @@ public class SceneManager : MonoBehaviour
             SpawnRandomHazard();
         }
         StartCoroutine(TrackScore());
+        StartCoroutine(AmmoReload());
     }
     
     public void DamagePlayer(float points) {

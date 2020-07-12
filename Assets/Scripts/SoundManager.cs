@@ -10,10 +10,6 @@ public class SoundManager : MonoBehaviour
     private const float DefaultPitch = 1.0f;
     
     void Start() {
-        if(Instance != null) {
-            Debug.LogWarning("Multiple instances of SoundManager detected!");
-            return;
-        }
         Instance = this;
     }
     

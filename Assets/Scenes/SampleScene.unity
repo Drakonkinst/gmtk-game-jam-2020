@@ -7939,8 +7939,8 @@ MonoBehaviour:
   hazardParent: {fileID: 75332412}
   maxHealth: 100
   currentHealth: 100
-  maxShotgunAmmo: 20
-  currentShotgunAmmo: 10
+  maxShotgunAmmo: 6
+  currentShotgunAmmo: 6
   magmaExpiryDecrement: 0.1
   magmaExpiryTime: 12
   maxSpawnAttempts: 10
@@ -7955,8 +7955,12 @@ MonoBehaviour:
   cameraSpeedUp: 12
   playerSlowDown: 0.5
   playerHealthGain: 20
-  numShellsOnReload: 5
+  reloadTime: 3
+  numShellsOnReload: 1
   numEnemyBoost: 10
+  damageSoundCooldown: 2
+  damageSound: {fileID: 8300000, guid: 0cc334ed4527342418aba7149d50451c, type: 3}
+  eventInterval: 4
   worldCenter: {x: 0, y: 0}
 --- !u!114 &1882007434
 MonoBehaviour:
@@ -8084,14 +8088,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b354b32f0b821be40a06d0c107e8d526, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenSpawn: 4
-  events:
-  - {fileID: 936735073485063590, guid: 44dde13ccbca01f4ea85fef7a8a3d3f4, type: 3}
-  spawnPoints:
-  - {fileID: 605396144}
-  - {fileID: 797926628}
-  - {fileID: 227024897}
-  keys: []
 --- !u!1 &1986749632
 GameObject:
   m_ObjectHideFlags: 0
