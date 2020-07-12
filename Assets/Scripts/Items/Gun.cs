@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-    public static Gun activeGun;
+    public static Gun activeGun = null;
     public static List<Gun> guns = new List<Gun>();
     public GameObject bulletPrefab;
     public float fireRate = 0.5f;
@@ -15,19 +15,22 @@ public class Gun : MonoBehaviour
     
     private Transform bulletParent;
     private float nextFire;
-    // Start is called before the first frame update
+    
     void Awake() {
-        guns.Add(this);
+        
     }
     
     void Start()
     {
+        guns.Add(this);
+        Debug.Log("Adding " + gameObject.name);
+        Debug.Log("There are now " + guns.Count + " things");
         bulletParent = SceneManager.Instance.bulletParent;
         myTransform = transform;
         nextFire = Time.time;
         player = SceneManager.Instance.player;
         if(this is Pistol) {
-            //Debug.Log("Found pistol!");
+            Debug.Log("Found pistol!");
             SetThisToActiveGun();
         }
     }
@@ -50,8 +53,10 @@ public class Gun : MonoBehaviour
     }
     
     private void SetThisToActiveGun() {
+        
         activeGun = this;
         SetRenderer(true);
+        Debug.Log(guns.Count);
         for(int i = 0; i < guns.Count; i++) {
             if(guns[i] != this) {
                 guns[i].SetRenderer(false);

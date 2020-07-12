@@ -184,6 +184,9 @@ public class SceneManager : MonoBehaviour
         nextDamageSound = Time.time;
         UpdateUIHealth();
         UpdateUIShotgunAmmo();
+        Debug.Log("Clearing guns");
+        Gun.guns.Clear();
+        Gun.activeGun = null;
     }
     
     void Start() {
