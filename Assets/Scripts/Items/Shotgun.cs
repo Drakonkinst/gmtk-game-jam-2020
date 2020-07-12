@@ -12,15 +12,9 @@ public class Shotgun : Gun
     public float lifetime = 0.5f;
     public float knockBack = 0.5f;
     public float fleeTime = 0.2f;
-    //public float reloadTime = 2.0f;
-    //private bool reloaing = false;
-    public int ammo = 2;
 
     public override bool Fire() {
-        if(ammo <= 0) // && !reloading
-        {
-            //reloaing = true;
-            //StartCoroutine("Reload");
+        if(SceneManager.Instance.currentShotgunAmmo <= 0) {
             return false;
         }
         Quaternion leftMost = myTransform.rotation * Quaternion.Euler(0f, -inaccuracy, 0f); 
@@ -30,13 +24,12 @@ public class Shotgun : Gun
         SpawnBullet(distance, height, myTransform.rotation * Quaternion.Euler(0f, UnityEngine.Random.Range(-inaccuracy,inaccuracy), 0f), bulletSpeed, lifetime, knockBack); // Creates three randomly inaccurate bullets within the same inaccuracy cone.
         SpawnBullet(distance, height, myTransform.rotation * Quaternion.Euler(0f, UnityEngine.Random.Range(-inaccuracy, inaccuracy), 0f), bulletSpeed, lifetime, knockBack);
         SpawnBullet(distance, height, myTransform.rotation * Quaternion.Euler(0f, UnityEngine.Random.Range(-inaccuracy, inaccuracy), 0f), bulletSpeed, lifetime, knockBack);
-        ammo--;
         PlayerMovement playerMvt = SceneManager.Instance.player.GetComponent<PlayerMovement>();
         Vector3 fleeFrom = myTransform.forward + myTransform.position;
         playerMvt.Flee(fleeFrom, fleeTime);
+        SceneManager.Instance.OnShotgunFire();
         return true;
         //Debug.Log("Fleeing from: " + fleeFrom);
-        
     }
     
     public override void SetRenderer(bool flag) {

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class SceneManager : MonoBehaviour
 {
@@ -11,10 +12,13 @@ public class SceneManager : MonoBehaviour
     public GameObject gunPlane;
     public GameObject camera;
     public GameObject healthBar;
+    public GameObject ammoCount;
     public Transform bulletParent;
     
     public float maxHealth = 100.0f;
     public float currentHealth = 50.0f;
+    public int maxShotgunAmmo = 20;
+    public int currentShotgunAmmo = 10;
     
     public Vector2 worldCenter = new Vector2(0, 0);
     [System.NonSerialized]
@@ -47,16 +51,26 @@ public class SceneManager : MonoBehaviour
         worldLength = size.z;
         Debug.Log(worldWidth + " x " + worldLength);
         healthBarWidth = healthBar.GetComponent<RectTransform>().sizeDelta.x;
-        Debug.Log("HEALTHBAR: " + healthBarWidth);
         UpdateUIHealth();
+        UpdateUIShotgunAmmo();
     }
     
     public void DamagePlayer(float points) {
+        currentHealth -= points;
         UpdateUIHealth();
+    }
+    
+    public void OnShotgunFire() {
+        currentShotgunAmmo--;
+        UpdateUIShotgunAmmo();
     }
     
     private void UpdateUIHealth() {
         healthBar.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, healthBarWidth * (currentHealth / maxHealth));
+    }
+    
+    private void UpdateUIShotgunAmmo() {
+        ammoCount.GetComponent<TextMeshProUGUI>().SetText("x " + currentShotgunAmmo);
     }
 
     // Update is called once per frame
