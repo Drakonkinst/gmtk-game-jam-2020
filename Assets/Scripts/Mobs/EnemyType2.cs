@@ -7,7 +7,7 @@ public class EnemyType2 : Steerable
 {
     public float minTrackingDistance = 10.0f;
     public float shootingDistance = 5.0f;
-    public float slowingDistance = 1.0f;
+    public float slowingDistance = 2.5f;
     public float contactDistance = 1.0f;
     public float attackCooldown = 2.0f;
     public float shootingFrequency = 1.0f;
@@ -35,23 +35,17 @@ public class EnemyType2 : Steerable
         temp.y = 1.0f;
         myTransform.position = temp;
         Debug.Log("Running!");
-        if (distance <= minTrackingDistance && distance >= shootingDistance) // If the enemy is within the tracking and shooting distance
+        if (distance <= minTrackingDistance) // If the enemy is within the tracking and shooting distance
         {
             FollowPlayer(); // The enemy will follow
             if(!shooting)
             {
                 StartCoroutine("ShootPlayer"); // And shoot at the player
+                shooting = true;
             }
-            shooting = true;
-        }
-        else if (distance < shootingDistance / 2)// If too close 
-        {
-            steering.Flee(SceneManager.Instance.playerTransform.position); // Flee while shooting
         }
         else // Otherwise
         {
-            shooting = false;
-            StopCoroutine("ShootPlayer"); // It will stop shooting
             DoWanderBehavior(); // And Wander until the enemy re-enters the previous range
         }
         
@@ -80,9 +74,6 @@ public class EnemyType2 : Steerable
     IEnumerator ShootPlayer()
     {
         EnemyGun enemyGun = childTransform.gameObject.GetComponent<EnemyGun>();
-
-        while (true)
-        {
             myTransform.LookAt(player);
             enemyGun.Shoot();
             yield return new WaitForSeconds(shootingFrequency);
@@ -94,7 +85,7 @@ public class EnemyType2 : Steerable
             myTransform.LookAt(player);
             enemyGun.Shoot();
             yield return new WaitForSeconds(shootingFrequency * 3);
-        }
+            shooting = false;
         // EnemyGun shoots in the direction the enemy is facing
     }
 }

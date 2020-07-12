@@ -139,7 +139,7 @@ MonoBehaviour:
   slowingDistance: 1
   contactDistance: 2
   attackCooldown: 2
-  shootingFrequency: 0.3
+  shootingFrequency: 0.75
   damage: 5
 --- !u!114 &8578730686800723463
 MonoBehaviour:
