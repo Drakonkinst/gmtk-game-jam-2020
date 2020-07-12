@@ -30,6 +30,7 @@ public class SceneManager : MonoBehaviour
     public float hazardSpawnDistanceMax = 15.0f;
     public float barrelGroupDistance = 10.0f;
     public int numBarrelsInGroup = 3;
+    public int initialHazards = 10;
     
     public Vector2 worldCenter = new Vector2(0, 0);
     [System.NonSerialized]
@@ -64,6 +65,15 @@ public class SceneManager : MonoBehaviour
             return Vector3.zero;
         }
         return spawnPoint;
+    }
+    
+    private void SpawnRandomHazard() {
+        int hazard = Random.Range(0, 2);
+        if(hazard == 0) {
+            SpawnRandomMagma();
+        } else if(hazard == 1) {
+            SpawnBarrelBunch();
+        }
     }
     
     private void SpawnRandomMagma() {
@@ -104,14 +114,9 @@ public class SceneManager : MonoBehaviour
     }
     
     void Start() {
-        SpawnRandomMagma();
-        SpawnRandomMagma();
-        SpawnRandomMagma();
-        SpawnRandomMagma();
-        SpawnBarrelBunch();
-        SpawnBarrelBunch();
-        SpawnBarrelBunch();
-        SpawnBarrelBunch();
+        for(int i = 0; i < initialHazards; i++) {
+            SpawnRandomHazard();
+        }
     }
     
     public void DamagePlayer(float points) {
