@@ -15,10 +15,18 @@ public class SceneManager : MonoBehaviour
     public GameObject ammoCount;
     public Transform bulletParent;
     
+    public GameObject magmaHazard;
+    public GameObject barrelHazard;
+    public Transform hazardParent;
+    
     public float maxHealth = 100.0f;
     public float currentHealth = 50.0f;
     public int maxShotgunAmmo = 20;
     public int currentShotgunAmmo = 10;
+    public float magmaExpiryDecrement = 0.1f;
+    public float magmaExpiryTime = 3.0f;
+    public int maxSpawnAttempts = 10;
+    public float hazardSpawnDistance = 5.0f;
     
     public Vector2 worldCenter = new Vector2(0, 0);
     [System.NonSerialized]
@@ -38,6 +46,31 @@ public class SceneManager : MonoBehaviour
         return new Vector2(x, y);
     }
     
+    public Vector3 GetPointAwayFromPlayer(float distance, float height, float maxDistance = Mathf.Infinity) {
+        Vector3 spawnPoint;
+        int numAttempts = 0;
+        float d;
+        do {
+            Vector2 randomPt = SceneManager.Instance.GetRandomWorldPoint();
+            spawnPoint = new Vector3(randomPt.x, height, randomPt.y);
+            d = Vector3.Distance(spawnPoint, playerTransform.position);
+            numAttempts++;
+        } while(numAttempts < maxSpawnAttempts && d < distance && d < maxDistance);
+        if(numAttempts == maxSpawnAttempts) {
+            Debug.Log("Failed to spawn!");
+            return Vector3.zero;
+        }
+        return spawnPoint;
+    }
+    
+    private void SpawnRandomMagma() {
+        Vector3 pos = GetPointAwayFromPlayer(hazardSpawnDistance, 0.01f, 10.0f);
+        GameObject magma = Instantiate(magmaHazard, hazardParent);
+        magma.transform.position = pos;
+        StartCoroutine(MagmaSpawn(magma));
+        StartCoroutine(MagmaExpire(magma));
+    }
+    
     void Awake() {
         if(Instance != null && Instance != this) {
             Destroy(gameObject);
@@ -53,6 +86,13 @@ public class SceneManager : MonoBehaviour
         healthBarWidth = healthBar.GetComponent<RectTransform>().sizeDelta.x;
         UpdateUIHealth();
         UpdateUIShotgunAmmo();
+    }
+    
+    void Start() {
+        SpawnRandomMagma();
+        SpawnRandomMagma();
+        SpawnRandomMagma();
+        SpawnRandomMagma();
     }
     
     public void DamagePlayer(float points) {
@@ -78,6 +118,22 @@ public class SceneManager : MonoBehaviour
     
     private void UpdateUIShotgunAmmo() {
         ammoCount.GetComponent<TextMeshProUGUI>().SetText("x " + currentShotgunAmmo);
+    }
+    
+    private IEnumerator MagmaSpawn(GameObject magma) {
+        magma.transform.localScale = new Vector3(0.1f, 1, 0.1f);
+        while(magma.transform.localScale.x < 1) {
+            yield return new WaitForSeconds(0.05f);
+            magma.transform.localScale += new Vector3(magmaExpiryDecrement, 0, magmaExpiryDecrement);
+        }
+    }
+    private IEnumerator MagmaExpire(GameObject magma) {
+        yield return new WaitForSeconds(magmaExpiryTime);
+        while(magma.transform.localScale.x > 0) {
+            yield return new WaitForSeconds(0.05f);
+            magma.transform.localScale -= new Vector3(magmaExpiryDecrement, 0, magmaExpiryDecrement);
+        }
+        Destroy(magma);
     }
 
     // Update is called once per frame

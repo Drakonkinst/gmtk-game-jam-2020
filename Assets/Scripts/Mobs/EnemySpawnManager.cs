@@ -8,7 +8,6 @@ public class EnemySpawnManager : MonoBehaviour
     public Transform enemyParent;
     public float spawnInterval = 3.0f;
     public float minSpawnDistance = 5.0f;
-    public int maxAttempts = 10;
     public GameObject enemyType1;
     public GameObject enemyType2;
     public int maxEnemies = 10;
@@ -55,17 +54,6 @@ public class EnemySpawnManager : MonoBehaviour
         }
     }
     private Vector3 FindRandomEnemySpawn() {
-        Vector3 spawnPoint;
-        int numAttempts = 0;
-        do {
-            Vector2 randomPt = SceneManager.Instance.GetRandomWorldPoint();
-            spawnPoint = new Vector3(randomPt.x, 1.0f, randomPt.y);
-            numAttempts++;
-        } while(numAttempts < maxAttempts && Vector3.Distance(spawnPoint, player.position) < minSpawnDistance);
-        if(numAttempts == maxAttempts) {
-            Debug.Log("Failed to spawn!");
-            return Vector3.zero;
-        }
-        return spawnPoint;
+        return SceneManager.Instance.GetPointAwayFromPlayer(minSpawnDistance, 1.0f);
     }
 }
