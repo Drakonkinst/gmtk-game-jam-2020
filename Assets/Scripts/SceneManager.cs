@@ -57,12 +57,19 @@ public class SceneManager : MonoBehaviour
     
     public void DamagePlayer(float points) {
         currentHealth -= points;
+        if(currentHealth < 0) {
+            currentHealth = 0;
+        }
         UpdateUIHealth();
     }
     
     public void OnShotgunFire() {
         currentShotgunAmmo--;
         UpdateUIShotgunAmmo();
+    }
+    
+    public void OnGameEnd() {
+        //player.GetComponent<SteeringManager>().maxVelocity = 0;
     }
     
     private void UpdateUIHealth() {

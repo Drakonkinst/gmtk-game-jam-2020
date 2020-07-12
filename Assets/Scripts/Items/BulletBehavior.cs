@@ -25,7 +25,7 @@ public class BulletBehavior : MonoBehaviour
 
     private void OnTriggerEnter(Collider col)
     {
-        if(!(col.gameObject.tag == "Gun" || col.gameObject.tag == "Player" || col.gameObject.tag == "Bullet"))
+        if(!(col.gameObject.tag == "Gun" || col.gameObject.tag == "Player" || col.gameObject.tag == "Bullet" || col.gameObject.tag == "Ignore"))
         {
             Debug.Log("Bullet Collision with " + col.gameObject.name);
             Destroy(gameObject); // When I collide with something, destroy myself

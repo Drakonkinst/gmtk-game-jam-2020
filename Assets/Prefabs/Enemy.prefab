@@ -228,6 +228,9 @@ MonoBehaviour:
   modelName: Model
   minTrackingDistance: 10
   slowingDistance: 1
+  contactDistance: 2
+  attackCooldown: 2
+  damage: 2.5
 --- !u!114 &114814853019900346
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -25,6 +25,7 @@ public class Steerable : MonoBehaviour
         if(model == null) {
             Debug.LogWarning("No steerable model found!");
         }
+        OnStart();
     }
 
     void Update()
@@ -57,6 +58,8 @@ public class Steerable : MonoBehaviour
             steering.SetWanderAngle(SceneManager.Instance.worldCenter);
         }
     }
+    
+    public virtual void OnStart() {}
     
     public virtual void DoBehavior() {
         steering.Wander();

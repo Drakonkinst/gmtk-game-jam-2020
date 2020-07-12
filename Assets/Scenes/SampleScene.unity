@@ -605,9 +605,9 @@ GameObject:
   - component: {fileID: 501023923}
   - component: {fileID: 501023922}
   - component: {fileID: 501023921}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Gun Plane
-  m_TagString: Gun
+  m_TagString: Ignore
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -620,7 +620,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 501023919}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.11, y: 1.67, z: 0.23}
+  m_LocalPosition: {x: 0.11, y: 1.39, z: 0.23}
   m_LocalScale: {x: 6.1895, y: 1, z: 7.066}
   m_Children: []
   m_Father: {fileID: 2041727851}
@@ -1013,7 +1013,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.5, y: 2, z: 1}
+  m_Size: {x: 1.75, y: 2, z: 1.5}
   m_Center: {x: 0.1, y: 0, z: 0}
 --- !u!23 &644097637
 MeshRenderer:
@@ -2728,7 +2728,7 @@ MonoBehaviour:
   ammoCount: {fileID: 1261150136}
   bulletParent: {fileID: 1119628753}
   maxHealth: 100
-  currentHealth: 50
+  currentHealth: 100
   maxShotgunAmmo: 20
   currentShotgunAmmo: 10
   worldCenter: {x: 0, y: 0}
