@@ -12,6 +12,7 @@ public class Shotgun : Gun
     public float lifetime = 0.5f;
     public float knockBack = 0.5f;
     public float fleeTime = 0.2f;
+    public AudioClip fireSound;
 
     public override bool Fire() {
         if(SceneManager.Instance.IsShotgunDisabled || SceneManager.Instance.currentShotgunAmmo <= 0) {
@@ -28,6 +29,7 @@ public class Shotgun : Gun
         Vector3 fleeFrom = myTransform.forward + myTransform.position;
         playerMvt.Flee(fleeFrom, fleeTime);
         SceneManager.Instance.OnShotgunFire();
+        SoundManager.Instance.Play(fireSound, SceneManager.Instance.camera.transform);
         return true;
         //Debug.Log("Fleeing from: " + fleeFrom);
     }

@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class BulletBehavior : MonoBehaviour
 {
-    public float speed = 1;
     private Transform myTransform;
 
     void Start()

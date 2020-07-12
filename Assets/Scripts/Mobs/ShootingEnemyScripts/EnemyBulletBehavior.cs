@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class EnemyBulletBehavior : MonoBehaviour
 {
-    public float speed = 1;
     private Transform myTransform;
 
     void Start()
@@ -25,14 +24,19 @@ public class EnemyBulletBehavior : MonoBehaviour
 
     private void OnTriggerEnter(Collider col)
     {
-        if (!(col.gameObject.tag == "Gun" || col.gameObject.tag == "Bullet" || col.gameObject.tag == "Ignore")) // 
+        Debug.Log("H");
+        if(!(col.gameObject.tag == "Gun" || col.gameObject.tag == "Bullet" || col.gameObject.tag == "Ignore")) // 
         {
-            Debug.Log("Bullet Collision with " + col.gameObject.name);
+            Debug.Log("Enemy Bullet Collision with " + col.gameObject.name);
             Destroy(gameObject); // When I collide with something, destroy myself
             if (col.gameObject.GetComponent<Breakable>() != null)
             {
                 col.gameObject.GetComponent<Breakable>().Damage(1);
             }
         }
+    }
+    
+    private void OnCollision(Collision col) {
+        Debug.Log("BOOPED " + col.collider.gameObject.name);
     }
 }
