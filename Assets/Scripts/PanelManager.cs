@@ -1,23 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PanelManager : MonoBehaviour
 {
-    public int timeBetweenSpawn = 2;
+    public int timeBetweenSpawn = 4;
 
-    private RectTransform uiTrans;
+    private TextMeshProUGUI textMesh;
     private char lastKey;
 
     public GameObject[] events;
     public GameObject[] spawnPoints;
+    public GameObject[] keys;
 
     void Start()
     {
-        uiTrans = GetComponentInParent<RectTransform>();
-        // StartCoroutine("SpawnEvents");
+        textMesh = GetComponent<TextMeshProUGUI>();
+        lastKey = 'Z';
+        StartCoroutine("SpawnEvents");
 
-        // TODO: Stretch this object's width to match that of UiTrans
     }
 
     void Update()
@@ -38,7 +40,7 @@ public class PanelManager : MonoBehaviour
 
     private IEnumerator SpawnEvents()
     {
-        while(true) // eventually replace with if game is active
+        while(true)
         {
             yield return new WaitForSeconds(timeBetweenSpawn);
             Instantiate(events[Random.Range(0, events.Length)], spawnPoints[Random.Range(0, spawnPoints.Length)].transform);
@@ -47,17 +49,17 @@ public class PanelManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) // Effect hit 
     {
-        if(lastKey != 'A') // && other.gameObject.transform.y > NUMBER
+        if(lastKey != 'A' && other.gameObject.transform.position.y > 65) // && other.gameObject.transform.y > NUMBER
         {
             Debug.Log("Collision with A");
             Destroy(other.gameObject);
         }
-        else if(lastKey != 'S') // && other.gameObject.transform.y < NUMBER && other.gameObject.transform.y > NUMBER
+        else if(lastKey != 'S' && other.gameObject.transform.position.y < 65 && other.gameObject.transform.position.y > 40)
         {
             Debug.Log("Collision with S");
             Destroy(other.gameObject);
         }
-        else if(lastKey != 'D') // && other.gameObject.transform.y < NUMBER
+        else if(lastKey != 'D' && other.gameObject.transform.position.y < 40)
         {
             Debug.Log("Collision with D");
             Destroy(other.gameObject);
