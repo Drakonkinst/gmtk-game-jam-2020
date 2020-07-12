@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemySpawnManager : MonoBehaviour
 {
+    public static EnemySpawnManager Instance;
     public Transform enemyParent;
     public float spawnInterval = 3.0f;
     public float minSpawnDistance = 5.0f;
@@ -11,11 +12,13 @@ public class EnemySpawnManager : MonoBehaviour
     public GameObject enemyType1;
     public GameObject enemyType2;
     public int maxEnemies = 10;
+    public List<GameObject> enemies = new List<GameObject>();
     
     private int numEnemies;
     private Transform player;
     
     void Start() {
+        Instance = this;
         numEnemies = 0;
         player = SceneManager.Instance.playerTransform;
         StartCoroutine(SpawnEnemies());
@@ -38,10 +41,19 @@ public class EnemySpawnManager : MonoBehaviour
         GameObject enemyToSpawn = enemyType1;
         
         GameObject enemySpawned = Instantiate(enemyToSpawn, enemyParent);
+        enemies.Add(enemySpawned);
+        CleanList();
         enemySpawned.transform.position = spawnPos;
         numEnemies++;
     }
     
+    private void CleanList() {
+        foreach(GameObject enemy in new List<GameObject>(enemies)) {
+            if(enemy == null) {
+                enemies.Remove(enemy);
+            }
+        }
+    }
     private Vector3 FindRandomEnemySpawn() {
         Vector3 spawnPoint;
         int numAttempts = 0;
