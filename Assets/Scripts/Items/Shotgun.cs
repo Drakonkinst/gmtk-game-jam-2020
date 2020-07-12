@@ -34,6 +34,9 @@ public class Shotgun : Gun
     
     public override void SetRenderer(bool flag) {
         Transform model = transform.Find("Shotgun");
+        if(model == null) {
+            return;
+        }
         model.GetComponent<MeshRenderer>().enabled = flag;
         model.Find("Pump_Loader").GetComponent<MeshRenderer>().enabled = flag;
         

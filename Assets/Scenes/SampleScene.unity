@@ -2683,7 +2683,7 @@ MonoBehaviour:
   wanderCircleDistance: 1
   wanderCircleRadius: 3
   maxAngleChangeDeg: 5
-  sightDistance: 0.5
+  sightDistance: 1
   sightAngleDeg: 30
   ignoreWalls: 0
 --- !u!54 &644097635
