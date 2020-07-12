@@ -368,7 +368,6 @@ GameObject:
   - component: {fileID: 1124318991}
   - component: {fileID: 1124318990}
   - component: {fileID: 1124318989}
-  - component: {fileID: 1124318992}
   m_Layer: 5
   m_Name: PlayButton
   m_TagString: Untagged
@@ -426,7 +425,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Play
+  m_text: 'LMB: Play'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -454,8 +453,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 80
-  m_fontSizeBase: 80
+  m_fontSize: 60
+  m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -492,13 +491,13 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -0.28918457, w: 0}
+  m_margin: {x: -126.955414, y: 0, z: -0.28918457, w: 0}
   m_textInfo:
     textComponent: {fileID: 1124318990}
-    characterCount: 4
+    characterCount: 9
     spriteCount: 0
-    spaceCount: 0
-    wordCount: 1
+    spaceCount: 1
+    wordCount: 2
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -526,18 +525,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1124318987}
   m_CullTransparentMesh: 0
---- !u!114 &1124318992
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1124318987}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2765608e060388a409c50f51a6bf312d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1450046493
 GameObject:
   m_ObjectHideFlags: 0
@@ -550,6 +537,7 @@ GameObject:
   - component: {fileID: 1450046496}
   - component: {fileID: 1450046495}
   - component: {fileID: 1450046494}
+  - component: {fileID: 1450046498}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -717,6 +705,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 2.69, y: 0, z: 0}
+--- !u!114 &1450046498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1450046493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2765608e060388a409c50f51a6bf312d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1482462997
 GameObject:
   m_ObjectHideFlags: 0
@@ -729,7 +729,6 @@ GameObject:
   - component: {fileID: 1482463001}
   - component: {fileID: 1482463000}
   - component: {fileID: 1482462999}
-  - component: {fileID: 1482463002}
   m_Layer: 5
   m_Name: ExitButton
   m_TagString: Untagged
@@ -787,7 +786,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Exit
+  m_text: 'ESC: Exit'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -815,8 +814,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 80
-  m_fontSizeBase: 80
+  m_fontSize: 60
+  m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -853,13 +852,13 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -0.28918457, w: 0}
+  m_margin: {x: -126.956726, y: 0, z: -0.28918457, w: 0}
   m_textInfo:
     textComponent: {fileID: 1482463000}
-    characterCount: 4
+    characterCount: 9
     spriteCount: 0
-    spaceCount: 0
-    wordCount: 1
+    spaceCount: 1
+    wordCount: 2
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -887,18 +886,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1482462997}
   m_CullTransparentMesh: 0
---- !u!114 &1482463002
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1482462997}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2765608e060388a409c50f51a6bf312d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1500111444
 GameObject:
   m_ObjectHideFlags: 0
@@ -983,7 +970,6 @@ GameObject:
   - component: {fileID: 1845156100}
   - component: {fileID: 1845156099}
   - component: {fileID: 1845156098}
-  - component: {fileID: 1845156101}
   m_Layer: 5
   m_Name: AboutButton
   m_TagString: Untagged
@@ -1041,7 +1027,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: About
+  m_text: 'RMB: About'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1069,8 +1055,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 80
-  m_fontSizeBase: 80
+  m_fontSize: 60
+  m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1107,13 +1093,13 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -0.28918457, w: 0}
+  m_margin: {x: -159.08643, y: 0, z: -0.28918457, w: 0}
   m_textInfo:
     textComponent: {fileID: 1845156099}
-    characterCount: 5
+    characterCount: 10
     spriteCount: 0
-    spaceCount: 0
-    wordCount: 1
+    spaceCount: 1
+    wordCount: 2
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -1141,15 +1127,3 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1845156096}
   m_CullTransparentMesh: 0
---- !u!114 &1845156101
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1845156096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2765608e060388a409c50f51a6bf312d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
